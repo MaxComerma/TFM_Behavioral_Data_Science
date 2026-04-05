@@ -1,0 +1,464 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Reference article: https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2018.01742/full
+
+```{r}
+library(dplyr)
+library(qgraph)
+library(smacof)
+library(ggplot2)
+library(tidyr)
+```
+
+```{r}
+df <- read.csv('../data/data_cleaned.csv')[2:215]
+colnames(df)
+
+```
+
+### Subsetting PHQ items
+
+### The domain here is 1 to 4 but the study of reference has it as 0 to 3
+```{r}
+phq <- df[ , 54:62]
+
+# no NA in phq
+sum(is.na(phq))
+
+phq
+```
+### How can I explore the distribution of these items? Should I sum it all and create a new colum? Should I create a long dataframe and calculate their distributions by facets? Discrepancy related to the domain (range of values): reference article is 0 to 3 and in the dataset it is 1 to 4.  
+```{r}
+
+long <- gather(phq, key = "Item", value = "Valor", phq_01:phq_09)
+
+ggplot(long, aes(x=Valor)) + geom_histogram(binwidth = 1, fill="blue", color = "black") +
+  facet_wrap(~ Item, scales = "free") +
+  labs(title = "Distribución de los ítems", x = "Valor", y = "Frequencia")
+
+```
+
+```{r}
+
+phq$phq_sum <- phq$phq_01 + phq$phq_02 + phq$phq_03 + phq$phq_04 + phq$phq_05 + phq$phq_06 + phq$phq_07 + phq$phq_08 + phq$phq_09
+
+
+head(phq)
+
+```
+
+```{r}
+summary(phq$phq_sum_1_4)
+
+brk <- seq(min(phq$phq_sum),max(phq$phq_sum), by=1)
+
+ggplot(phq, aes(x= phq_sum)) + geom_histogram(binwidth = 1, fill="darkblue", color="grey") + theme_minimal() + 
+  scale_x_continuous(breaks = brk) + labs(title = "Distribución del puntaje de PHQ 1 a 4") + geom_vline(xintercept =  c(5,10,15,20), color="red", linetype="dashed") + annotate("text", x=  c(5,10,15,20), y= 200,  label = c("ligera", "moderada", "moderadamente \nsevera", "severa"), size=3, color="red")
+```
+
+
+```{r}
+ggplot(phq, aes(phq_sum)) + geom_boxplot(color="darkblue",fill="lightblue",  outlier.colour = "red", notch = TRUE, show.legend = TRUE) + 
+  scale_x_continuous(breaks = brk) + labs(title = "Boxplot de PHQ 0 a 3", x="Sumas")
+
+#count(phq$phq_sum_1_4[phq$phq_sum_1_4 ])
+```
+### 32 outliers
+
+```{r}
+IQR <- quantile(phq$phq_sum, 0.75) - quantile(phq$phq_sum, 0.25)
+outsup <- (IQR * 1.5) + quantile(phq$phq_sum, 0.75)
+outinf <- (IQR * 1.5) - quantile(phq$phq_sum, 0.25)
+
+
+table(phq$phq_sum[phq$phq_sum %in% boxplot.stats(phq$phq_sum)$out] )
+```
+```{r}
+outliers::outlier(phq$phq_01)
+
+ggplot(long, aes(x=Valor)) + geom_boxplot(fill="blue", color = "black") +
+  facet_wrap(~ Item, scales = "free") +
+  labs(title = "Distribución de los ítems", x = "Valor", y = "Frequencia")
+```
+
+# Force-directed plotting with Fruchterman–Reingold
+
+Most studies on networks in psychopathology have used the Fruchterman-Reingold (FR) algorithm to create graphs. This algorithm, similar to methods by Kamada and Kawai, is like setting up a system of balls connected by stretchy strings. The strings pull connected balls closer, while the other balls push them apart, resulting in a neat graph where nodes are well-spaced and edges are evenly distributed.
+
+Force-directed algorithms aim to produce visually pleasing graphs by minimizing edge crossings and spacing nodes evenly. The goal is not to place the nodes in specific meaningful locations, but to make the network easy to view, showing connections and clusters clearly.
+
+It's important to avoid interpreting the spatial positions of nodes in these graphs, as the placement is not meant to convey specific meanings. Misinterpreting the layout is a common mistake, as it's natural to want to find meaning in the arrangement.
+
+The FR algorithm is the default in the qgraph R package, making it straightforward to use. 
+
+
+### Empezamos por crear una correlación de orden cero y a partir de ahí hacer los edges
+```{r}
+zeroorder_phq <- cor(phq[1:10])
+
+qg_phq <- qgraph(zeroorder_phq, layout = "spring", label.prop=0.4, edge.width = 0.8,curve = 0.7, curveAll = T,  border.color = "red",border.width = 2, directed = FALSE, edge.labels = F, esize = 18)
+
+```
+### Dividing by gender 
+
+```{r}
+sum(is.na(df$Gender))
+
+phq$gender <- df$Gender
+
+phq_gndr <- phq %>%
+  select(gender, phq_01, phq_02,phq_03,phq_04,phq_05,phq_06,phq_07,phq_08,phq_09, phq_sum)
+
+phq_gndr_M <- phq_gndr %>%
+  filter(gender == 1)
+
+phq_gndr_F <- phq_gndr %>%
+  filter(gender == 2)
+
+zeroorder_phq_M <- cor(phq_gndr_M[2:length(phq_gndr_M)])
+zeroorder_phq_F <- cor(phq_gndr_F[2:length(phq_gndr_F)])
+
+```
+
+```{r}
+
+qg_phq_M <- qgraph(zeroorder_phq_M, layout = "spring", title= "Hombres")
+
+qg_phq_F <- qgraph(zeroorder_phq_F, layout = "spring", title ="Mujeres")
+
+```
+
+###
+
+
+```{r}
+#FR_net_by_scales_topnum_measures(phq, list(phq), 10)
+
+phq_centrality <- as.data.frame(centrality(qg_phq))
+
+phq_centrality %>%
+  arrange(desc(OutDegree))
+```
+```{r}
+centrality_auto(qg_phq)
+```
+
+
+
+
+# Checking almost all variables
+
+```{r}
+df_gen <- df %>%
+  select(!c(Gender, Civil_Status, Employment_Status, Province, ResponseId))
+
+gen_zeroorder <- cor(df_gen, use = "complete.obs")
+
+colnames(df_gen)
+```
+
+
+
+
+```{r}
+
+groups <- list(Sociodem = 1:3, Pers_BFI2 = 4:18, Pers_hexaco = 19:28, Depr_cesd = 29:48, Depr_phq = 49:58, Depr_promis = 59:85, Depr_qids = 86:95, Depr_Ans_dass = 96:115, Depr_Ans_hads = 116:133, Ans_gad = 134:140, Ans_tmas = 141:190, Ans_sas = 191:205, Pers_rbfi2 = 206:209, Pers_rhexaco = 210:217, Ans_rtmas = 218:229)
+
+color_nodes <- c("salmon", "darkgreen", "lightgreen", "deepskyblue", "dodgerblue", "royalblue", "navy", "darkorange", "orange", "lightcoral", "firebrick", "darkred",  "darkgreen", "lightgreen" ,"lightcoral")
+
+
+qg <- qgraph(gen_zeroorder, layout="spring", labels = colnames(gen_zeroorder), groups = groups , color = color_nodes, theme="TeamFortress", height = 180, width = 140)
+
+qg
+```
+
+## Multidimensional Scaling of Networks
+
+MDS represents proximities among variables as distances between points in a low-dimensional space (e.g., two or three dimensions; Mair et al., 2016). Proximity is an umbrella term for “similarities” between variables (e.g., correlation) or “dissimilarities” (e.g., Euclidean distance). Because MDS helps represent complex data in low-dimensional space, it dovetails precisely with the goal of visual presentation of complex psychological networks. That is, we can use MDS to represent proximities in a two-dimensional space (e.g., X & Y) to produce two-dimensional network plots. MDS is particularly useful for understanding networks because the distances between plotted nodes are interpretable as Euclidean distances.
+
+Because the smacof R package (De Leeuw and Mair, 2009) requires dissimilarities (rather than similarities) as input, we will convert the correlation matrix into a dissimilarity matrix.
+
+```{r}
+library("smacof")
+
+dissimilarities <- sim2diss(gen_zeroorder)
+
+head(round(dissimilarities$conf, 2))
+
+
+```
+After determining our dissimilarity matrix, we then locate points (configuration matrix) in a two-dimensional space such that the distances between the objects (nodes) approximate a transformation of the dissimilarities as closely as possible, given the constraints of a two-dimensional solution. 
+
+```{r}
+MDS <- mds(dissimilarities)
+
+
+```
+
+## Transformations
+
+
+```{r}
+MDS_ordinal <- mds(dissimilarities, type = 'ordinal')
+plot(MDS_ordinal, plot.type = "Shepard", main = "Ordinal")
+text(1.2,0.3, paste("Stress =", round(MDS_ordinal$stress,2)))
+
+MDS_ratio <- mds(dissimilarities, type = "ratio")
+plot(MDS_ratio, plot.type = "Shepard", main = "Ratio")
+text(1.2,0.3, paste("Stress =", round(MDS_ratio$stress,2)))
+
+MDS_interval <- mds(dissimilarities, type = "interval")
+plot(MDS_interval, plot.type = "Shepard", main = "Interval")
+text(1.2,0.3, paste("Stress =", round(MDS_interval$stress,2)))
+
+MDS_mspline <- mds(dissimilarities, type = "mspline")
+plot(MDS_mspline, plot.type = "Shepard", main = "Spline")
+text(1.2,0.3, paste("Stress =", round(MDS_mspline$stress,2)))
+```
+
+
+```{r}
+qgraph(gen_zeroorder, layout = MDS_ordinal$conf, labels = colnames(gen_zeroorder), groups = groups , color = color_nodes, vsize=4)
+text(-1,-1, paste("Stress=",round(MDS_ordinal$stress,2)))
+
+qgraph(gen_zeroorder, layout = MDS_mspline$conf, labels = colnames(gen_zeroorder), groups = groups , color = color_nodes)
+text(-1,-1, paste("Stress=",round(MDS_mspline$stress,2)))
+```
+Researchers concerned about overlap obscuring important information can reduce the size of the nodes or use points instead of circles to represent variables. Let's produce a plot with points (instead of circles) for nodes. We will use the textplot function in the wordcloud R package (Fellows, 2014) to ensure that node labels do not overlap (See Figure 4).
+
+
+```{r}
+library("wordcloud")
+
+#qgraph(gen_zeroorder, layout = MDS_ordinal$conf, labels = colnames(gen_zeroorder), groups = groups , color = color_nodes, vsize=0, rescale=FALSE, labels=FALSE)
+
+qgraph(gen_zeroorder, layout = MDS_ordinal$conf, vsize=0, rescale=FALSE, labels=FALSE)
+
+points(MDS_ordinal$conf, pch=16)
+
+textplot(MDS_ordinal$conf[,1]+.03, MDS_ordinal$conf[,2]+.03, colnames(gen_zeroorder), new=F)
+
+
+
+#text(-1,-1, paste("Stress=",round(MDS_ordinal$stress,2)))
+```
+
+ we could plot our partial correlation network, complete with edges, in a zero-order correlation space. The reverse is also possible; one could use zero-order correlations as edges, and convert a partial correlation matrix into dissimilarities as input for an MDS plotting configuration. The researcher thus maximizes the data conveyed by the graph by using the space to indicate information that is not given in the edge structure. As an example, let's compute a graphical LASSO network of the adult network, as was done by McNally et al. (2017), but use the zero-order MDS configuration from before to plot the positioning of the nodes
+
+```{r}
+df_gen <- df_gen %>% na.omit(df_gen)
+lasso <- EBICglasso(cor(phq),  dim(phq)[1])
+
+qgraph(lasso, layout = MDS_ordinal, vsize=4)
+```
+
+
+```{r}
+cleaned_phq <- phq %>% na.omit(phq)
+cor(cleaned_phq)
+l <- EBICglasso(cor(cleaned_phq), dim(cleaned_phq)[1])
+
+qgraph(l, layout = "sprin", vsize=4)
+```
+
+
+```{r}
+dim(phq)
+phq[1:10]
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+
+
+
+
+```{r}
+centrality(qg, alpha = 1, posfun = abs, all.shortest.paths = FALSE,
+weighted = TRUE, signed = TRUE, R2 = FALSE)
+
+centralityPlot(qg)
+```
+
+```{r}
+library(psych)
+data(bfi)
+```
+
+```{r}
+# Compute correlations:
+CorMat <- cor_auto(bfi[,1:25])
+# Compute graph with tuning = 0 (BIC):
+BICgraph <- EBICglasso(CorMat, nrow(bfi), 0, threshold = TRUE)
+# Compute graph with tuning = 0.5 (EBIC)
+EBICgraph <- EBICglasso(CorMat, nrow(bfi), 0.5, threshold = TRUE)
+
+# Plot both:
+layout(t(1:2))
+BICgraph <- qgraph(BICgraph, layout = "spring", title = "BIC", details = TRUE)
+EBICgraph <- qgraph(EBICgraph, layout = "spring", title = "EBIC")
+# Compare centrality and clustering:
+layout(1)
+centralityPlot(list(BIC = BICgraph, EBIC = EBICgraph))
+clusteringPlot(list(BIC = BICgraph, EBIC = EBICgraph))
+```
+
+```{r}
+zeroorder_phq <- cor_auto(phq[,1:10])
+zeroorder_phq
+
+
+# Compute graph with tuning = 0 (BIC):
+BICgraph <- EBICglasso(zeroorder_phq, nrow(phq[1:10]), 0, threshold = TRUE)
+# Compute graph with tuning = 0.5 (EBIC)
+EBICgraph <- EBICglasso(zeroorder_phq, nrow(phq[1:10]), 0.5, threshold = TRUE)
+
+# Plot both:
+layout(t(1:2))
+BICgraph <- qgraph(BICgraph, layout = "spring", title = "BIC", details = TRUE)
+EBICgraph <- qgraph(EBICgraph, layout = "spring", title = "EBIC")
+# Compare centrality and clustering:
+layout(1)
+centralityPlot(list(BIC = BICgraph, EBIC = EBICgraph))
+clusteringPlot(list(BIC = BICgraph, EBIC = EBICgraph))
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+df <- read.csv('data/data/data_cleaned.csv')
+```
+
+```{r}
+install.packages("RSQLite")
+library(RSQLite)
+
+```
+```{r}
+conn <- dbConnect(RSQLite::SQLite(), "mm.db")
+
+dbWriteTable(conn, 'mmdep', df)
+
+dbListTables(conn)
+```
+
+
+```{r}
+
+dbGetQuery(conn, "select * from mmdep")
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+FR_net_by_scales_topnum_measures <- function(df, list_cols, top_number) # list_cols may have format: names = range (e.g.: cesd = 35:54)
+{ 
+  #unlisting cols to subset them
+  vec_cols <- unlist(list_cols)
+
+  ndf <- df[vec_cols]
+
+  #creating correlation
+  cor_mat <- cor(ndf)
+  # creating indices to group by name
+
+  
+  
+    update_indices <- function(indices, offset) {
+    return(seq(from = 1 + offset, to = length(indices) + offset))
+  }
+  
+  # Calculate the offset
+  offset <- 0
+
+  # Create the updated list of ranges
+  updated_list_cols <- list()
+  for (name in names(list_cols)) {
+    updated_list_cols[[name]] <- update_indices(list_cols[[name]], offset)
+    offset <- offset + length(list_cols[[name]])}
+  
+  
+  # creating network  
+qg <- qgraph(cor_mat, layout="spring", labels = colnames(cor_mat), groups = updated_list_cols ,color = sample(colors(), length(list_cols)), title = "Network of all items selected")
+
+    
+cent_net <- as.data.frame(centrality(qg)) 
+
+# By degree
+cent_net_degree <- cent_net%>%
+  arrange(desc(OutDegree))
+cent_net_degree <- cent_net_degree[1:top_number, ]
+
+# By betweenness
+cent_net_bet <- cent_net%>%
+arrange(desc(Betweenness))
+cent_net_bet <- cent_net_bet[1:top_number, ]
+
+# By closeness
+cent_net_clos <- cent_net%>%
+arrange(desc(Closeness))
+cent_net_clos <- cent_net_clos[1:top_number, ]
+
+
+
+# Subsetting the top variables
+cut_df_degree <- df[row.names(cent_net_degree)]
+cor_cut_df_degree <- cor(cut_df_degree)
+
+cut_df_bet <- df[row.names(cent_net_bet)]
+cor_cut_df_bet <- cor(cut_df_bet)
+
+cut_df_clos <- df[row.names(cent_net_clos)]
+cor_cut_df_clos <- cor(cut_df_clos)
+
+sel_measure_degree <- qgraph(cor_cut_df_degree, layout = "spring", labels = colnames(cor_cut_df_degree), theme="TeamFortress", title = paste("Network of the top", top_number, "nodes with the highest Degree"))
+
+sel_measure_bet <- qgraph(cor_cut_df_bet, layout = "spring", labels = colnames(cor_cut_df_bet), theme="TeamFortress", title = paste("Network of the top", top_number, "nodes with the highest Betweenness"))
+
+sel_measure_clos <- qgraph(cor_cut_df_clos, layout = "spring", labels = colnames(cor_cut_df_clos), theme="TeamFortress", title = paste("Network of the top", top_number, "nodes with the highest Closeness"))
+  
+
+  return(list(df = ndf, network =  qg, selected_bet = sel_measure_bet,selected_clos = sel_measure_clos, measures = cent_net, selected_degree = cent_net_degree, selected_betweenness = cent_net_bet, selected_closeness = cent_net_clos))
+} 
+```
+

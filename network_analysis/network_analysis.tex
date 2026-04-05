@@ -1,0 +1,2563 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={network\_analysis},
+  pdfauthor={Pietro Olivetti},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{network\_analysis}
+\author{Pietro Olivetti}
+\date{2024-10-17}
+
+\begin{document}
+\maketitle
+
+\section{Network analysis of Depression and Anxiety
+Symptomatology}\label{network-analysis-of-depression-and-anxiety-symptomatology}
+
+\subsection{Packages and loading}\label{packages-and-loading}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(igraph)}
+\FunctionTok{library}\NormalTok{(qgraph)}
+\FunctionTok{library}\NormalTok{(bootnet)}
+\FunctionTok{library}\NormalTok{(corpcor)}
+\FunctionTok{library}\NormalTok{(openxlsx)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(matrixcalc)}
+\FunctionTok{library}\NormalTok{(e1071)}
+\FunctionTok{library}\NormalTok{(networktools)}
+\FunctionTok{library}\NormalTok{(EGAnet)}
+\CommentTok{\#library(smacof)}
+\FunctionTok{source}\NormalTok{(}\StringTok{\textquotesingle{}../data/questions.R\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{multiC }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(cor\_mat, }\AttributeTok{t\_hold =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{name =} \StringTok{""}\NormalTok{)\{threshold }\OtherTok{\textless{}{-}}\NormalTok{ t\_hold}
+\NormalTok{high\_corr\_pairs }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(}\FunctionTok{abs}\NormalTok{(cor\_mat) }\SpecialCharTok{\textgreater{}}\NormalTok{ threshold }\SpecialCharTok{\&} \FunctionTok{abs}\NormalTok{(cor\_mat) }\SpecialCharTok{\textless{}} \DecValTok{1}\NormalTok{, }\AttributeTok{arr.ind =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# variable names and corresponding correlation values}
+\NormalTok{high\_corr\_list }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Variable1 =} \FunctionTok{rownames}\NormalTok{(cor\_mat)[high\_corr\_pairs[, }\DecValTok{1}\NormalTok{]],}
+  \AttributeTok{Variable2 =} \FunctionTok{colnames}\NormalTok{(cor\_mat)[high\_corr\_pairs[, }\DecValTok{2}\NormalTok{]],}
+  \AttributeTok{Correlation =}\NormalTok{ cor\_mat[high\_corr\_pairs]}
+\NormalTok{)}
+
+\CommentTok{\# variables and their correlation values}
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ high\_corr\_list }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Correlation))\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Organizing data}\label{organizing-data}
+
+\subsubsection{All variables}\label{all-variables}
+
+Creating the dataframe and the group's list for all variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Dataframe}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}../data/data\_cleaned.csv\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Groups}
+\NormalTok{groups\_all\_variables }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{Ids =} \DecValTok{1}\NormalTok{, }\AttributeTok{Sociodem =} \DecValTok{2}\SpecialCharTok{:}\DecValTok{8}\NormalTok{, }\AttributeTok{Pers\_BFI2 =} \DecValTok{9}\SpecialCharTok{:}\DecValTok{23}\NormalTok{, }\AttributeTok{Pers\_hexaco =} \DecValTok{24}\SpecialCharTok{:}\DecValTok{33}\NormalTok{, }\AttributeTok{Depr\_cesd =} \DecValTok{34}\SpecialCharTok{:}\DecValTok{53}\NormalTok{, }\AttributeTok{Depr\_phq =} \DecValTok{54}\SpecialCharTok{:}\DecValTok{62}\NormalTok{, }\AttributeTok{Depr\_promis =} \DecValTok{63}\SpecialCharTok{:}\DecValTok{90}\NormalTok{, }\AttributeTok{Depr\_qids =} \DecValTok{91}\SpecialCharTok{:}\DecValTok{106}\NormalTok{, }\AttributeTok{Depr\_Ans\_dass =} \DecValTok{107}\SpecialCharTok{:}\DecValTok{120}\NormalTok{, }\AttributeTok{Depr\_Ans\_hads =} \DecValTok{121}\SpecialCharTok{:}\DecValTok{134}\NormalTok{, }\AttributeTok{Ans\_gad =} \DecValTok{135}\SpecialCharTok{:}\DecValTok{141}\NormalTok{, }\AttributeTok{Ans\_tmas =} \DecValTok{142}\SpecialCharTok{:}\DecValTok{191}\NormalTok{, }\AttributeTok{Ans\_sas =} \DecValTok{192}\SpecialCharTok{:}\DecValTok{206}\NormalTok{)}
+
+\DocumentationTok{\#\#\#\#\#\#\#\#}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{All Scales}\label{all-scales}
+
+Creating the dataframe and the group's list for all scales
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Dataframe}
+\NormalTok{df\_all\_scales }\OtherTok{\textless{}{-}}\NormalTok{ df[}\DecValTok{9}\SpecialCharTok{:}\DecValTok{206}\NormalTok{]}
+
+\NormalTok{groups\_all\_scales }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{Pers\_BFI2 =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{15}\NormalTok{, }\AttributeTok{Pers\_hexaco =} \DecValTok{16}\SpecialCharTok{:}\DecValTok{25}\NormalTok{, }\AttributeTok{Depr\_cesd =} \DecValTok{26}\SpecialCharTok{:}\DecValTok{45}\NormalTok{, }\AttributeTok{Depr\_phq =} \DecValTok{46}\SpecialCharTok{:}\DecValTok{54}\NormalTok{, }\AttributeTok{Depr\_promis =} \DecValTok{55}\SpecialCharTok{:}\DecValTok{82}\NormalTok{, }\AttributeTok{Depr\_qids =} \DecValTok{83}\SpecialCharTok{:}\DecValTok{98}\NormalTok{, }\AttributeTok{Depr\_Ans\_dass =} \DecValTok{99}\SpecialCharTok{:}\DecValTok{112}\NormalTok{, }\AttributeTok{Depr\_Ans\_hads =} \DecValTok{113}\SpecialCharTok{:}\DecValTok{126}\NormalTok{, }\AttributeTok{Ans\_gad =} \DecValTok{127}\SpecialCharTok{:}\DecValTok{133}\NormalTok{, }\AttributeTok{Ans\_tmas =} \DecValTok{134}\SpecialCharTok{:}\DecValTok{183}\NormalTok{, }\AttributeTok{Ans\_sas =} \DecValTok{184}\SpecialCharTok{:}\DecValTok{198}\NormalTok{)}
+
+\NormalTok{group\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Ids"}\NormalTok{, }\StringTok{"Sociodem"}\NormalTok{, }\StringTok{"Pers\_BFI2"}\NormalTok{, }\StringTok{"Pers\_hexaco"}\NormalTok{, }\StringTok{"Depr\_cesd"}\NormalTok{, }\StringTok{"Depr\_phq"}\NormalTok{, }\StringTok{"Depr\_promis"}\NormalTok{, }\StringTok{"Depr\_qids"}\NormalTok{, }\StringTok{"Depr\_Ans\_dass"}\NormalTok{, }\StringTok{"Depr\_Ans\_hads"}\NormalTok{, }\StringTok{"Ans\_gad"}\NormalTok{, }\StringTok{"Ans\_tmas"}\NormalTok{, }\StringTok{"Ans\_sas"}\NormalTok{)}
+\DocumentationTok{\#\#\#\#\#\#\#}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Scales related to anxiety and
+depression}\label{scales-related-to-anxiety-and-depression}
+
+Creating the dataframe and the group's list for all scales related to
+depression and anxiety
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Dataframe}
+\NormalTok{df\_anx\_dp }\OtherTok{\textless{}{-}}\NormalTok{ df[}\DecValTok{34}\SpecialCharTok{:}\DecValTok{206}\NormalTok{]}
+
+
+
+\CommentTok{\# Groups}
+\NormalTok{groups\_anx\_dep }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{D\_cesd =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{, }\AttributeTok{D\_phq =} \DecValTok{21}\SpecialCharTok{:}\DecValTok{29}\NormalTok{, }\AttributeTok{D\_promis =} \DecValTok{30}\SpecialCharTok{:}\DecValTok{57}\NormalTok{, }\AttributeTok{D\_qids =} \DecValTok{58}\SpecialCharTok{:}\DecValTok{73}\NormalTok{, }\AttributeTok{A\_dass =} \DecValTok{74}\SpecialCharTok{:}\DecValTok{80}\NormalTok{ , }\AttributeTok{D\_dass =} \DecValTok{81}\SpecialCharTok{:}\DecValTok{87}\NormalTok{ , }\AttributeTok{A\_hads =} \DecValTok{88}\SpecialCharTok{:}\DecValTok{94}\NormalTok{, }\AttributeTok{D\_hads =} \DecValTok{95}\SpecialCharTok{:}\DecValTok{101}\NormalTok{, }\AttributeTok{A\_gad =} \DecValTok{102}\SpecialCharTok{:}\DecValTok{108}\NormalTok{, }\AttributeTok{A\_sas =} \DecValTok{109}\SpecialCharTok{:}\DecValTok{123}\NormalTok{, }\AttributeTok{A\_tmas =} \DecValTok{124}\SpecialCharTok{:}\DecValTok{173}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Scales related to anxiety and depression without
+TMAS}\label{scales-related-to-anxiety-and-depression-without-tmas}
+
+TMAS items are excluded because they are binary, unlike the Likert-scale
+items in the dataset, which could affect the accuracy of network
+analysis by increasing multicollinearity and distorting symptom
+relationships. Dichotomizing data, such as converting scores to binary
+categories, risks information loss, and while Cai (2022) uses binary
+data in network analysis, the potential impact of this on network
+structure is not addressed. Studies like Burger et al.~(2022) advise
+caution when transforming data for network analysis, particularly with
+binarization. Excluding TMAS is a methodological choice that aims to
+ensure a more reliable and consistent analysis by using Likert scales
+for all symptoms.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Dataframe}
+
+\NormalTok{D\_cesd }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{]}
+\NormalTok{D\_phq }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\DecValTok{21}\SpecialCharTok{:}\DecValTok{29}\NormalTok{]}
+\NormalTok{D\_promis }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\DecValTok{30}\SpecialCharTok{:}\DecValTok{57}\NormalTok{]}
+\NormalTok{D\_qids }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\DecValTok{58}\SpecialCharTok{:}\DecValTok{73}\NormalTok{]}
+\NormalTok{A\_dass }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\FunctionTok{c}\NormalTok{(}\DecValTok{74}\NormalTok{, }\DecValTok{76}\NormalTok{, }\DecValTok{78}\NormalTok{, }\DecValTok{79}\NormalTok{, }\DecValTok{82}\NormalTok{, }\DecValTok{85}\NormalTok{, }\DecValTok{86}\NormalTok{)] }\CommentTok{\#74 ...80}
+\NormalTok{D\_dass }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\FunctionTok{c}\NormalTok{(}\DecValTok{75}\NormalTok{, }\DecValTok{77}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{81}\NormalTok{, }\DecValTok{83}\NormalTok{, }\DecValTok{84}\NormalTok{, }\DecValTok{87}\NormalTok{)] }\CommentTok{\#81 ... 87 }
+\NormalTok{A\_hads }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\FunctionTok{c}\NormalTok{(}\DecValTok{88}\NormalTok{,}\DecValTok{90}\NormalTok{,}\DecValTok{92}\NormalTok{,}\DecValTok{94}\NormalTok{,}\DecValTok{96}\NormalTok{, }\DecValTok{98}\NormalTok{, }\DecValTok{100}\NormalTok{)] }\CommentTok{\# 88 ... 94}
+\NormalTok{D\_hads }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\FunctionTok{c}\NormalTok{(}\DecValTok{89}\NormalTok{,}\DecValTok{91}\NormalTok{,}\DecValTok{93}\NormalTok{,}\DecValTok{95}\NormalTok{,}\DecValTok{97}\NormalTok{,}\DecValTok{99}\NormalTok{,}\DecValTok{101}\NormalTok{)] }\CommentTok{\# 95 ... 101}
+\NormalTok{A\_gad }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\DecValTok{102}\SpecialCharTok{:}\DecValTok{108}\NormalTok{]}
+\NormalTok{A\_sas }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\DecValTok{159}\SpecialCharTok{:}\DecValTok{173}\NormalTok{] }\CommentTok{\#109 ... 123}
+\NormalTok{A\_tmas }\OtherTok{\textless{}{-}}\NormalTok{ df\_anx\_dp[}\DecValTok{109}\SpecialCharTok{:}\DecValTok{158}\NormalTok{] }\CommentTok{\#124 ... 174}
+
+
+\NormalTok{df\_anx\_dp\_adj }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{list}\NormalTok{(D\_cesd, D\_phq, D\_promis, D\_qids, A\_dass, D\_dass, A\_hads, D\_hads, A\_gad, A\_sas))}
+
+
+
+\CommentTok{\# Groups}
+\NormalTok{groups\_anx\_dep\_adj }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{D\_cesd =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{, }\AttributeTok{D\_phq =} \DecValTok{21}\SpecialCharTok{:}\DecValTok{29}\NormalTok{, }\AttributeTok{D\_promis =} \DecValTok{30}\SpecialCharTok{:}\DecValTok{57}\NormalTok{, }\AttributeTok{D\_qids =} \DecValTok{58}\SpecialCharTok{:}\DecValTok{73}\NormalTok{, }\AttributeTok{A\_dass =} \DecValTok{74}\SpecialCharTok{:}\DecValTok{80}\NormalTok{ , }\AttributeTok{D\_dass =} \DecValTok{81}\SpecialCharTok{:}\DecValTok{87}\NormalTok{ , }\AttributeTok{A\_hads =} \DecValTok{88}\SpecialCharTok{:}\DecValTok{94}\NormalTok{, }\AttributeTok{D\_hads =} \DecValTok{95}\SpecialCharTok{:}\DecValTok{101}\NormalTok{, }\AttributeTok{A\_gad =} \DecValTok{102}\SpecialCharTok{:}\DecValTok{108}\NormalTok{, }\AttributeTok{A\_sas =} \DecValTok{109}\SpecialCharTok{:}\DecValTok{123}\NormalTok{)}
+
+\CommentTok{\# To be more readable on Network Graphs here is a vector of shortenned names}
+
+\NormalTok{readable\_anx\_dp }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"c01"}\NormalTok{, }\StringTok{"c02"}\NormalTok{, }\StringTok{"c03"}\NormalTok{, }\StringTok{"c04"}\NormalTok{, }\StringTok{"c05"}\NormalTok{, }\StringTok{"c06"}\NormalTok{, }\StringTok{"c07"}\NormalTok{, }\StringTok{"c08"}\NormalTok{, }\StringTok{"c09"}\NormalTok{, }\StringTok{"c10"}\NormalTok{, }\StringTok{"c11"}\NormalTok{, }\StringTok{"c12"}\NormalTok{, }\StringTok{"c13"}\NormalTok{, }\StringTok{"c14"}\NormalTok{, }\StringTok{"c15"}\NormalTok{, }\StringTok{"c16"}\NormalTok{, }\StringTok{"c17"}\NormalTok{, }\StringTok{"c18"}\NormalTok{, }\StringTok{"c19"}\NormalTok{, }\StringTok{"c20"}\NormalTok{, }
+\StringTok{"ph01"}\NormalTok{, }\StringTok{"ph02"}\NormalTok{, }\StringTok{"ph03"}\NormalTok{, }\StringTok{"ph04"}\NormalTok{, }\StringTok{"ph05"}\NormalTok{, }\StringTok{"ph06"}\NormalTok{, }\StringTok{"ph07"}\NormalTok{, }\StringTok{"ph08"}\NormalTok{, }\StringTok{"ph09"}\NormalTok{, }
+\StringTok{"pr01"}\NormalTok{, }\StringTok{"pr02"}\NormalTok{, }\StringTok{"pr03"}\NormalTok{, }\StringTok{"pr04"}\NormalTok{, }\StringTok{"pr05"}\NormalTok{, }\StringTok{"pr06"}\NormalTok{, }\StringTok{"pr07"}\NormalTok{, }\StringTok{"pr08"}\NormalTok{, }\StringTok{"pr09"}\NormalTok{, }\StringTok{"pr10"}\NormalTok{, }\StringTok{"pr11"}\NormalTok{, }\StringTok{"pr12"}\NormalTok{, }\StringTok{"pr13"}\NormalTok{, }\StringTok{"pr14"}\NormalTok{, }\StringTok{"pr15"}\NormalTok{, }\StringTok{"pr16"}\NormalTok{, }\StringTok{"pr17"}\NormalTok{, }\StringTok{"pr18"}\NormalTok{, }\StringTok{"pr19"}\NormalTok{, }\StringTok{"pr20"}\NormalTok{, }\StringTok{"pr21"}\NormalTok{, }\StringTok{"pr22"}\NormalTok{, }\StringTok{"pr23"}\NormalTok{, }\StringTok{"pr24"}\NormalTok{, }\StringTok{"pr25"}\NormalTok{, }\StringTok{"pr26"}\NormalTok{, }\StringTok{"pr27"}\NormalTok{, }\StringTok{"pr28"}\NormalTok{, }
+\StringTok{"q01"}\NormalTok{, }\StringTok{"q02"}\NormalTok{, }\StringTok{"q03"}\NormalTok{, }\StringTok{"q04"}\NormalTok{, }\StringTok{"q05"}\NormalTok{, }\StringTok{"q06"}\NormalTok{, }\StringTok{"q07"}\NormalTok{, }\StringTok{"q08"}\NormalTok{, }\StringTok{"q09"}\NormalTok{, }\StringTok{"q10"}\NormalTok{, }\StringTok{"q11"}\NormalTok{, }\StringTok{"q12"}\NormalTok{, }\StringTok{"q13"}\NormalTok{, }\StringTok{"q14"}\NormalTok{, }\StringTok{"q15"}\NormalTok{, }\StringTok{"q16"}\NormalTok{, }
+\StringTok{"d02"}\NormalTok{, }\StringTok{"d04"}\NormalTok{, }\StringTok{"d07"}\NormalTok{, }\StringTok{"d09"}\NormalTok{, }\StringTok{"d15"}\NormalTok{, }\StringTok{"d19"}\NormalTok{, }\StringTok{"d20"}\NormalTok{, }\StringTok{"d03"}\NormalTok{, }\StringTok{"d05"}\NormalTok{, }\StringTok{"d10"}\NormalTok{, }\StringTok{"d13"}\NormalTok{, }\StringTok{"d16"}\NormalTok{, }\StringTok{"d17"}\NormalTok{, }\StringTok{"d21"}\NormalTok{, }
+\StringTok{"h01"}\NormalTok{, }\StringTok{"h03"}\NormalTok{, }\StringTok{"h05"}\NormalTok{, }\StringTok{"h07"}\NormalTok{, }\StringTok{"h09"}\NormalTok{, }\StringTok{"h11"}\NormalTok{, }\StringTok{"h13"}\NormalTok{, }\StringTok{"h02"}\NormalTok{, }\StringTok{"h04"}\NormalTok{, }\StringTok{"h06"}\NormalTok{, }\StringTok{"h08"}\NormalTok{, }\StringTok{"h10"}\NormalTok{, }\StringTok{"h12"}\NormalTok{, }\StringTok{"h14"}\NormalTok{, }
+\StringTok{"g01"}\NormalTok{, }\StringTok{"g02"}\NormalTok{, }\StringTok{"g03"}\NormalTok{, }\StringTok{"g04"}\NormalTok{, }\StringTok{"g05"}\NormalTok{, }\StringTok{"g06"}\NormalTok{, }\StringTok{"g07"}\NormalTok{, }
+\StringTok{"s01"}\NormalTok{, }\StringTok{"s02"}\NormalTok{, }\StringTok{"s03"}\NormalTok{, }\StringTok{"s04"}\NormalTok{, }\StringTok{"s05"}\NormalTok{, }\StringTok{"s06"}\NormalTok{, }\StringTok{"s07"}\NormalTok{, }\StringTok{"s08"}\NormalTok{, }\StringTok{"s09"}\NormalTok{, }\StringTok{"s10"}\NormalTok{, }\StringTok{"s11"}\NormalTok{, }\StringTok{"s12"}\NormalTok{, }\StringTok{"s13"}\NormalTok{, }\StringTok{"s14"}\NormalTok{, }\StringTok{"s15"}\NormalTok{)  }
+\CommentTok{\#"t01", "t02", "t03", "t04", "t05", "t06", "t07", "t08", "t09", "t10", "t11", "t12", "t13", "t14", "t15", "t16", "t17", \#"t18", "t19", "t20", "t21", "t22", "t23", "t24", "t25", "t26", "t27", "t28", "t29", "t30", "t31", "t32", "t33", "t34", \#"t35", "t36", "t37", "t38", "t39", "t40", "t41", "t42", "t43", "t44", "t45", "t46", "t47", "t48", "t49", "t50")}
+
+\CommentTok{\# Group names}
+\NormalTok{group\_names\_anx\_dep }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Depr\_cesd"}\NormalTok{, }\StringTok{"Depr\_phq"}\NormalTok{, }\StringTok{"Depr\_promis"}\NormalTok{, }\StringTok{"Depr\_qids"}\NormalTok{, }\StringTok{"Ans\_dass"}\NormalTok{ , }\StringTok{"Depr\_dass"}\NormalTok{ , }\StringTok{"Ans\_hads"}\NormalTok{, }\StringTok{"Depr\_hads"}\NormalTok{, }\StringTok{"Ans\_gad"}\NormalTok{, }\StringTok{"Ans\_sas"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Descriptive Statistics}\label{descriptive-statistics}
+
+\subsubsection{Demographics}\label{demographics}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#to be done}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{General Statistics about the
+scales}\label{general-statistics-about-the-scales}
+
+Summary, Graphs, range, mean, sd, etc\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#to be done}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Force-directed plotting with
+Fruchterman--Reingold}\label{force-directed-plotting-with-fruchtermanreingold}
+
+Most studies on networks in psychopathology have used the
+Fruchterman-Reingold (FR) algorithm to create graphs (Borsboom et al.,
+2021). This algorithm is like setting up a system of balls connected by
+stretchy strings. The strings pull connected balls closer, while the
+other balls push them apart, resulting in a graph where nodes are
+well-spaced and edges are evenly distributed (Deserno et al., 2022).
+
+The goal of force-directed algorithms is not to place nodes in specific
+meaningful locations, but to make the network easy to view, showing
+connections and clusters clearly. The arrangement produced by these
+algorithms is primarily driven by the need for visual clarity and does
+not necessarily reflect any inherent structure or meaning beyond the
+connections themselves. Therefore, it is crucial to focus on the
+connections between nodes and their strengths, rather than the spatial
+arrangement of nodes, when interpreting a force-directed graph (Deserno
+et al., 2022).
+
+The spatial positions of nodes in these graphs are highly sensitive to
+variations in edge weights, even those as small as 0.01. A slight
+alteration in edge weights can lead to significant changes in the node
+arrangement (Burger et al., 2022). Therefore, the layout should not be
+interpreted as reflecting inherent properties or relationships among the
+nodes beyond their connection.
+
+\subsubsection{Testing different correlation
+methods}\label{testing-different-correlation-methods}
+
+Spearman Correlation, as mentioned, is particularly useful for analyzing
+non-parametric data. Spearman correlations, or rank-based correlations,
+can be used to handle non-normal continuous or ordered categorical data.
+On the other hand, automatic recognition of data type with cor\_auto
+function from qgraph typically creates a dense correlation matrix,
+incorporating automatic correction for ordinal and continuous data,
+which can lead to multicollinearity. ForcePD forces the matrix to be
+positive definite. A positive definite matrix guarantees that all its
+eigenvalues are positive, a condition crucial for methods like testing
+the robustness of the network. Multicollinearity arises when predictor
+variables in a model are highly correlated, making it challenging to
+discern the unique effect of each predictor (Epskamp, Borsboom, \&
+Fried, 2018). Therefore, testing which adjencency matrix is better in
+terms of multicollinearity and knowing whether it is positive. The
+results below show that both matrices are positive definite but what
+actually indicates that Spearman is the most suitable method for our
+data is the amount of variable pairs over a threshold of 0.8. While
+Spearman hasarount 34 pairs with that extremelly high correlation, the
+cor\_auto function has 1232 pairs.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# cor\_auto}
+\NormalTok{symp\_auto }\OtherTok{\textless{}{-}} \FunctionTok{cor\_auto}\NormalTok{(df\_anx\_dp\_adj, }\AttributeTok{forcePD =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Spearman Correlation}
+
+\NormalTok{symp\_spear }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(df\_anx\_dp\_adj, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+
+\CommentTok{\# Estimating and penalizing connections}
+\NormalTok{n1 }\OtherTok{\textless{}{-}} \FunctionTok{estimateNetwork}\NormalTok{(df\_anx\_dp\_adj, }\AttributeTok{default=}\StringTok{"EBICglasso"}\NormalTok{,  }\AttributeTok{corMethod =} \StringTok{"spearman"}\NormalTok{)}
+
+
+\NormalTok{mc\_auto }\OtherTok{\textless{}{-}} \FunctionTok{multiC}\NormalTok{(symp\_auto)}
+\FunctionTok{head}\NormalTok{(mc\_auto, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Variable1 Variable2 Correlation
+## 1   cesd_06   cesd_04   0.9395364
+## 2   cesd_04   cesd_06   0.9395364
+## 3   cesd_04   cesd_02   0.9318807
+## 4   cesd_02   cesd_04   0.9318807
+## 5 promis_12 promis_10   0.9257129
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Automatic correlation method is positive definite = "}\NormalTok{, }\FunctionTok{is.positive.definite}\NormalTok{(symp\_auto), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Its amount of variable pairs over the threshold of 0.8 is:"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(mc\_auto))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Automatic correlation method is positive definite =  TRUE 
+## Its amount of variable pairs over the threshold of 0.8 is: 1300
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mc\_spear }\OtherTok{\textless{}{-}} \FunctionTok{multiC}\NormalTok{(symp\_spear)}
+\FunctionTok{head}\NormalTok{(mc\_spear, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Variable1 Variable2 Correlation
+## 1 promis_12 promis_10   0.8486060
+## 2 promis_10 promis_12   0.8486060
+## 3 promis_05 promis_02   0.8340622
+## 4 promis_02 promis_05   0.8340622
+## 5   cesd_06   cesd_04   0.8288046
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Spearman method is positive definite = "}\NormalTok{, }\FunctionTok{is.positive.definite}\NormalTok{(symp\_spear), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Its amount of variable pairs over the threshold of 0.8 is:"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(mc\_spear))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Spearman method is positive definite =  TRUE 
+## Its amount of variable pairs over the threshold of 0.8 is: 34
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mc\_n1 }\OtherTok{\textless{}{-}} \FunctionTok{multiC}\NormalTok{(n1}\SpecialCharTok{$}\NormalTok{graph)}
+\FunctionTok{head}\NormalTok{(mc\_n1, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] Variable1   Variable2   Correlation
+## <0 rows> (or 0-length row.names)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Spearman method is positive definite = "}\NormalTok{, }\FunctionTok{is.positive.definite}\NormalTok{(n1}\SpecialCharTok{$}\NormalTok{graph), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Its amount of variable pairs over the threshold of 0.8 is:"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(mc\_n1))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Spearman method is positive definite =  FALSE 
+## Its amount of variable pairs over the threshold of 0.8 is: 0
+\end{verbatim}
+
+\subsubsection{Creating networks out of individual scales using FR
+algorithm and Spearman
+Correlation}\label{creating-networks-out-of-individual-scales-using-fr-algorithm-and-spearman-correlation}
+
+The Spearman correlation is particularly useful for analyzing
+non-parametric data, such as those generated by Likert scales, which are
+commonly employed in psychological research. Likert scales typically
+consist of a set of statements or questions with ordered response
+categories, such as ``strongly agree,'' and ``strongly disagree''. The
+ordered nature of these responses often violates the assumptions of
+parametric statistical methods that require continuous, normally
+distributed data (Blanken et al., 2022)*. Spearman correlation, as a
+non-parametric method, does not rely on these assumptions and can be
+used to assess the strength and direction of the association between
+variables measured on Likert scales. This makes it a valuable tool for
+examining relationships between variables that do not meet the criteria
+for parametric analyses, providing researchers with a robust alternative
+for analyzing data commonly encountered in psychological research.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{1}
+\ControlFlowTok{for}\NormalTok{(sc }\ControlFlowTok{in}\NormalTok{ groups\_anx\_dep\_adj)\{}
+\NormalTok{  zero\_order\_scale }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(df\_anx\_dp\_adj[sc], }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+  \FunctionTok{qgraph}\NormalTok{(zero\_order\_scale, }\AttributeTok{layout=}\StringTok{"spring"}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{colnames}\NormalTok{(zero\_order\_scale), }\AttributeTok{color =} \FunctionTok{sample}\NormalTok{(}\FunctionTok{colors}\NormalTok{(), }\DecValTok{1}\NormalTok{), }\AttributeTok{theme=}\StringTok{"TeamFortress"}\NormalTok{, }\AttributeTok{height =} \DecValTok{180}\NormalTok{, }\AttributeTok{width =} \DecValTok{140}\NormalTok{, }\AttributeTok{title =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Network of"}\NormalTok{, group\_names\_anx\_dep[n]))}
+
+\NormalTok{  n }\OtherTok{\textless{}{-}}\NormalTok{ n }\SpecialCharTok{+} \DecValTok{1}  
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-9-1.pdf}
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-9-2.pdf}
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-9-3.pdf}
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-9-4.pdf}
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-9-5.pdf}
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-9-6.pdf}
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-9-7.pdf}
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-9-8.pdf}
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-9-9.pdf}
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-9-10.pdf}
+
+\subsection{Network graphs and
+analysis}\label{network-graphs-and-analysis}
+
+At first glace, the items seem to be rather clustered together. In spite
+of the visual impression, it is crucial to explore some measures in
+order to explore the network.
+
+\begin{verbatim}
+## pdf 
+##   2
+\end{verbatim}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\textless\textless\textless\textless\textless\textless\textless{} HEAD
+\#\#\# Networks by nosological entities aimed by the scale ======= \#\#
+Centrality Measures for Individual Scales (Strength, Betweenness,
+Closeness):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{spearman\_cesd }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(D\_cesd, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_cesd }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_cesd)}
+
+\NormalTok{spearman\_phq }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(D\_phq, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_phq }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_phq)}
+
+\NormalTok{spearman\_promis }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(D\_promis, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_promis }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_promis)}
+
+\NormalTok{spearman\_qids }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(D\_qids, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_qids }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_qids)}
+
+\NormalTok{spearman\_dass\_a }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(A\_dass, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_dass\_a }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_dass\_a)}
+
+\NormalTok{spearman\_dass\_d }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(D\_dass, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_dass\_d }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_dass\_d)}
+
+\NormalTok{spearman\_hads\_a }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(A\_hads, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_hads\_a }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_hads\_a)}
+
+\NormalTok{spearman\_hads\_d }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(D\_hads, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_hads\_d }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_hads\_d)}
+
+\NormalTok{spearman\_gad }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(A\_gad, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_gad }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_gad)}
+
+\NormalTok{spearman\_sas }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(A\_sas, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_sas }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_sas)}
+
+\NormalTok{spearman\_tmas }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(A\_tmas, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\NormalTok{centrality\_tmas }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(spearman\_tmas)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+d5b403185badaf959096b494ef3bf2a688a3cf61
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+
+Identifying nodes only by the nosological entity one can see that the
+quantity of items related to depressive symptoms is far superior. It is
+no surprise since we excluded TMAS from the dataset.Anxiety items are in
+total 36 and the other 87 are related to depression. Despite
+representing a different nosological entity, these items seem to be
+clustered together with those of depression. Later, we investigate if
+the items about anxiety will form their own communities or blend with
+the others.
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\subsection{4. Robustness Network}\label{robustness-network}
+
+Once we have find a correlation matrix that is positive determinate is
+controlled for multicollinearity, it is necessary to test the robustness
+of this weighted network. In order to do it, we will use the bootnet
+package (Version 1.6; Epskamp, 2024). Bootnet uses bootstrapping to
+calculate standard errors and confidence intervals and is able to
+poerform it in nonparametric data, such as ours.
+
+\subsubsection{Edges Robustness}\label{edges-robustness}
+
+In the graph below the red dots represent the mean from each edge of the
+original data and the black dots represent the same but for the
+bootstrap edges. In spite of the wider confidence interval band when it
+comes close to zero, all the dots seem to be tight together, indicating
+strong stability and reliability.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# 4.1 edge weight bootstrap}
+
+\CommentTok{\#m1\textless{}{-}bootnet(df\_anx\_dp\_adj, nBoots=500, default="EBICglasso", labels=colnames(df\_anx\_dp\_adj), type="nonparametric", statistics =c("edge", "strength", "closeness", "betweenness"))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#save(m1, file = "boot\_symp\_df\_edgeweights.Rdata")}
+\FunctionTok{load}\NormalTok{(}\AttributeTok{file =} \StringTok{"../images/boot\_symp\_df\_edgeweights.Rdata"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(m1, }\AttributeTok{labels =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{order =} \StringTok{"sample"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#pdf("../images/boot\_symp\_df\_edgeweights.pdf", useDingbats=FALSE) }
+\CommentTok{\#plot(m1, labels = F, order = "sample")}
+\CommentTok{\#dev.off()}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Node dropping}\label{node-dropping}
+
+This bootstring method removes the nodes progressively and measures the
+correlation of the network for each removal. When there is only around
+35\% of the original nodes the correlation goes down quickly, increasing
+variability. This suggests that the network is significantly stable
+since it takes a huge amount of nodes removal to make it reduce the
+reliability of general node strength.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#m2\textless{}{-} bootnet(df\_anx\_dp\_adj, default = "EBICglasso", nBoots=500, type = "node", labels=colnames(df\_anx\_dp\_adj), statistics =c("strength", "closeness", "betweenness"))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#save(m2, file = "boot\_symp\_df\_nodedropping.Rdata")}
+\FunctionTok{load}\NormalTok{(}\AttributeTok{file =} \StringTok{"../images/boot\_symp\_df\_nodedropping.Rdata"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(m2)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot(m2, perNode = T, legend = T, statistics =c("strength"))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Centrality Measures (Strength, Betweenness,
+Closeness):}\label{centrality-measures-strength-betweenness-closeness}
+
+Centrality measures are used to understand the relative importance or
+influence of nodes within a network. It is important to acknowledge that
+while centrality measures can provide valuable insights into the
+structure of a network, they should not be directly interpreted as
+measures of causal influence (Borsboom, 2017). The sources emphasize
+that network models, especially those based on correlation or partial
+correlation, do not inherently specify the direction of causal effects
+(Borsboom et al., 2021).
+
+These measures help identify the most important nodes (symptoms) in the
+network. Strength indicates how connected a node is (Cai et al., 2022);
+Betweenness represents how often a node lies on the shortest path
+between other nodes; Closeness measures how quickly a node can reach
+other nodes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# creating the table with all measures requested}
+\NormalTok{cent\_table\_spear }\OtherTok{\textless{}{-}} \FunctionTok{centrality\_auto}\NormalTok{(symp\_spear)}
+
+\DocumentationTok{\#\#\# Centrality Measures}
+\FunctionTok{pdf}\NormalTok{(}\StringTok{"../images/centrality\_spear.pdf"}\NormalTok{)}
+
+\NormalTok{cent\_graph\_spear }\OtherTok{\textless{}{-}} \FunctionTok{centralityPlot}\NormalTok{(symp\_spear, }\AttributeTok{scale =} \StringTok{"raw0"}\NormalTok{, }\AttributeTok{include =} \FunctionTok{c}\NormalTok{(}\StringTok{"Strength"}\NormalTok{, }\StringTok{"Closeness"}\NormalTok{, }\StringTok{"Betweenness"}\NormalTok{), }\AttributeTok{decreasing =}\NormalTok{ T, }\AttributeTok{labels =}\NormalTok{ readable\_anx\_dp)}
+\FunctionTok{dev.off}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## pdf 
+##   2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cent\_graph\_spear}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\#\#\#\#Strength
+
+Strength is the sum of the correlations of one node to all other nodes
+with higher values reflecting greater centrality in the network (Cai et
+al., 2022).
+
+There is a remarkable dominance of promis items among the strongest
+ones. Almost all of the top 10 are arguably items related to the core
+DSM-V-TR symptom ``depressed mood''. The data distribution for
+``Strength'' is substantially skewed to the right, as presented in the
+graph. Most items have moderate to high strength, which could indicate
+that many nodes are strong within their own clusters but less connected
+across clusters. This hypothesis makes even more sense when we take into
+consideration the near-zero correlation between Strength and Betweenness
+measures (-0.0187) that suggests that nodes with high strength are not
+acting as bridges between clusters, but are tightely connected within
+their groups. Core Major Depression symptoms like depressed mood and
+anhedonia are particularly prominent here.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{top\_str }\OtherTok{\textless{}{-}}\NormalTok{ cent\_table\_spear}\SpecialCharTok{$}\NormalTok{node.centrality }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Strength)) }
+
+\FunctionTok{head}\NormalTok{(top\_str, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           Betweenness   Closeness Strength ExpectedInfluence
+## promis_05           1 0.004365505 72.76541          72.10187
+## promis_21           4 0.004315606 71.70724          71.02427
+## promis_28           2 0.004349012 71.62770          70.87923
+## promis_15           0 0.004311767 71.46486          70.77000
+## promis_02           0 0.004246198 70.95327          70.28330
+## promis_24           0 0.004251037 70.55769          69.92529
+## promis_10           0 0.004221163 70.51280          69.82857
+## promis_07           0 0.004234416 70.41204          69.67582
+## promis_03           2 0.004262541 70.38916          69.75880
+## promis_26           1 0.004227029 70.03546          69.46545
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tail}\NormalTok{(top\_str, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Betweenness   Closeness Strength ExpectedInfluence
+## hads_11           0 0.002340342 36.32468         -36.32468
+## qids_06           7 0.002086622 31.89005          30.88587
+## hads_09           0 0.001943953 29.45306          28.99017
+## qids_03           0 0.001790776 26.86590          26.61916
+## qids_09           1 0.001643137 24.06010          22.96374
+## cesd_11           0 0.001720255 23.87546          23.63657
+## qids_07           0 0.001683269 21.98051          21.00595
+## qids_08           0 0.001535180 21.80473          20.94286
+## qids_02           0 0.001517898 18.92350          18.57312
+## qids_04           0 0.001251495 14.29942          14.14807
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Top 10 Strength }\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Top 10 Strength
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#questions[c("promis\_05", "promis\_21", "promis\_28","promis\_15", "promis\_02")] }
+\NormalTok{questions[}\FunctionTok{c}\NormalTok{(}\FunctionTok{which}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(df\_anx\_dp\_adj) }\SpecialCharTok{\%in\%} \FunctionTok{sort}\NormalTok{(}\FunctionTok{row.names}\NormalTok{(top\_str)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{])))] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $promis_02
+## [1] "Sentí que nada me ilusionaba"
+## 
+## $promis_03
+## [1] "Me sentí indefenso/a (que no podía hacer nada para ayudarme)"
+## 
+## $promis_05
+## [1] "Sentí que nada me podía animar"
+## 
+## $promis_07
+## [1] "Me sentí triste"
+## 
+## $promis_10
+## [1] "Me sentí fracasado/a"
+## 
+## $promis_15
+## [1] "Me sentí deprimido/a"
+## 
+## $promis_21
+## [1] "Me sentí desesperanzado/a"
+## 
+## $promis_24
+## [1] "Sentí que nada me interesaba"
+## 
+## $promis_26
+## [1] "Sentí que mi vida estaba vacía"
+## 
+## $promis_28
+## [1] "Me sentí completamente agotado/a emocionalmente"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Bottom 20 Strength }\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Bottom 20 Strength
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#questions[c("cesd\_11", "qids\_07", "qids\_08","qids\_02", "qids\_04")] }
+\NormalTok{questions[}\FunctionTok{c}\NormalTok{(}\FunctionTok{which}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(df\_anx\_dp\_adj) }\SpecialCharTok{\%in\%} \FunctionTok{sort}\NormalTok{(}\FunctionTok{row.names}\NormalTok{(top\_str)[}\DecValTok{104}\SpecialCharTok{:}\DecValTok{123}\NormalTok{])))] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $cesd_01
+## [1] "Tenía poco apetito"
+## 
+## $cesd_09
+## [1] "Sentía que era una mala persona"
+## 
+## $cesd_11
+## [1] "Dormía más de lo habitual"
+## 
+## $cesd_15
+## [1] "Quería hacerse daño"
+## 
+## $cesd_18
+## [1] "Perdió peso sin intentarlo"
+## 
+## $qids_01
+## [1] "Problemas a la hora de dormirse"
+## 
+## $qids_02
+## [1] "Sueño nocturno alterado"
+## 
+## $qids_03
+## [1] "Despertarse demasiado temprano"
+## 
+## $qids_04
+## [1] "Dormir demasiado"
+## 
+## $qids_06
+## [1] "Ha habido disminución del apetito"
+## 
+## $qids_07
+## [1] "Ha habido aumento del apetito"
+## 
+## $qids_08
+## [1] "Ha habido pérdida de peso"
+## 
+## $qids_09
+## [1] "Ha habido aumento de peso"
+## 
+## $hads_09
+## [1] "Tengo una sensación extraña, como si tuviera mariposas en el estómago"
+## 
+## $hads_11
+## [1] "Me siento inquieto/a, como si no pudiera parar de moverme"
+## 
+## $hads_14
+## [1] "Me divierto con un buen libro, la radio, o un programa de televisión"
+## 
+## $sas_06
+## [1] "Me molestan los dolores de cabeza, cuello y dolor de espalda"
+## 
+## $sas_10
+## [1] "Tengo desmayos o sensación de desmayos"
+## 
+## $sas_13
+## [1] "Tengo que vaciar mi vejiga con frecuencia"
+## 
+## $sas_14
+## [1] "Se me calienta la cara y se me pone enrojecida"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(top\_str}\SpecialCharTok{$}\NormalTok{Strength)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   14.30   53.04   61.14   57.91   66.97   72.77
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{top\_str}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           Betweenness   Closeness Strength ExpectedInfluence
+## promis_05           1 0.004365505 72.76541          72.10187
+## promis_21           4 0.004315606 71.70724          71.02427
+## promis_28           2 0.004349012 71.62770          70.87923
+## promis_15           0 0.004311767 71.46486          70.77000
+## promis_02           0 0.004246198 70.95327          70.28330
+## promis_24           0 0.004251037 70.55769          69.92529
+## promis_10           0 0.004221163 70.51280          69.82857
+## promis_07           0 0.004234416 70.41204          69.67582
+## promis_03           2 0.004262541 70.38916          69.75880
+## promis_26           1 0.004227029 70.03546          69.46545
+## promis_16           0 0.004247373 69.84445          69.13925
+## promis_23           0 0.004226995 69.80930          69.09570
+## phq_02              0 0.004199282 69.74711          69.13069
+## promis_19           0 0.004167235 69.62472          68.82916
+## promis_25           0 0.004127187 69.51043          68.85726
+## promis_12           0 0.004179470 69.50268          68.82247
+## dass_13             0 0.004174714 69.34869          68.64348
+## qids_05             3 0.004226433 69.22826          68.53338
+## promis_13           0 0.004157139 69.18391          68.58634
+## phq_06              0 0.004135586 68.71430          68.13412
+## sas_04              7 0.004194146 68.41047          67.74584
+## promis_04           0 0.004095054 67.73403          67.11397
+## promis_17           8 0.004043714 67.71474          66.99984
+## promis_01           3 0.004096780 67.55858          66.98393
+## promis_06           0 0.004079000 67.49035          66.88234
+## gad_04              7 0.004087235 67.36120          66.45176
+## promis_11           0 0.004061058 67.31300          66.70663
+## promis_18           0 0.004065504 67.13045          66.52045
+## cesd_02             0 0.004095002 67.11337          66.46290
+## dass_10             0 0.004043313 67.04027          66.47720
+## cesd_17             0 0.004055556 66.98225          66.40246
+## cesd_04             0 0.004066901 66.95792          66.34563
+## promis_14           0 0.004008120 66.89616          66.28869
+## promis_08           0 0.004050334 66.81481          66.26287
+## cesd_06             0 0.004048560 66.73220          66.08963
+## gad_02              0 0.003988842 65.85789          65.02218
+## promis_27           2 0.004013408 65.81898          65.21915
+## cesd_20             0 0.004021614 65.49416          64.81890
+## promis_09           0 0.003942218 65.35468          64.71848
+## cesd_08             4 0.003967253 65.35340          64.79722
+## dass_16             6 0.003987713 65.20574          64.65450
+## phq_01              0 0.003961423 65.03949          64.37323
+## promis_22           0 0.003919588 64.84493          64.25700
+## dass_21             3 0.003919996 64.53676          64.08782
+## gad_07              1 0.003958294 64.26399          63.56580
+## gad_03              0 0.003865575 63.93473          63.21244
+## gad_05              2 0.003947502 63.83019          62.98978
+## gad_01              4 0.003900918 63.68041          62.74014
+## dass_17             0 0.003869430 63.66582          63.17903
+## dass_15             0 0.003909181 63.45704          62.94351
+## promis_20           0 0.003851671 62.95447          62.52618
+## phq_07              0 0.003877604 62.92737          62.30008
+## cesd_10             1 0.003864541 62.77519          62.16929
+## gad_06              0 0.003826367 62.67095          61.95579
+## sas_07              0 0.003850001 62.65721          61.94906
+## dass_03             0 0.003856149 62.53519          61.90497
+## sas_02              1 0.003886191 62.44665          61.71195
+## dass_05             0 0.003807290 62.30481          61.68498
+## sas_01              0 0.003821499 62.23201          61.35565
+## sas_03              0 0.003814324 61.85838          61.14196
+## cesd_16             0 0.003762756 61.17733          60.53834
+## phq_04              0 0.003753760 61.14090          60.48965
+## dass_20             0 0.003745179 60.99948          60.41252
+## dass_09             0 0.003764482 60.99858          60.34265
+## hads_13            16 0.003799790 60.91073          60.23454
+## hads_03             0 0.003749486 60.70202          59.98904
+## hads_01             0 0.003722996 60.56362          59.77613
+## cesd_07             0 0.003707139 60.37425          59.80822
+## qids_13             0 0.003684406 59.67399          59.12208
+## cesd_03             0 0.003677162 59.57916          58.93214
+## qids_11             7 0.003680638 59.53475          58.94672
+## qids_14            13 0.003707683 59.04593          58.36471
+## qids_10             0 0.003684553 58.74389          57.95845
+## hads_05             0 0.003579597 58.65758          57.92425
+## hads_02             0 0.003592106 58.49023          57.88499
+## cesd_13             0 0.003634867 58.08730          57.42054
+## hads_04             0 0.003562676 57.90110          57.31156
+## qids_16             6 0.003582511 57.66363          56.70060
+## dass_04             6 0.003628298 57.60559          57.07628
+## phq_05             82 0.003644281 57.56202          56.90769
+## dass_19             0 0.003592053 57.47805          56.87018
+## hads_06             0 0.003496237 57.34211          56.73716
+## phq_08              0 0.003603120 57.13730          56.64477
+## qids_12             2 0.003515792 56.52034          56.16213
+## hads_07             2 0.003489004 56.01847          55.29853
+## hads_12             0 0.003440434 55.88313          55.28843
+## hads_08             3 0.003499152 55.00555          54.34730
+## phq_09            105 0.003422915 54.87306          54.54851
+## sas_08              0 0.003433762 54.57348          53.91405
+## cesd_14             0 0.003380698 54.45320          54.10374
+## cesd_05            87 0.003403429 54.43822          53.76546
+## qids_15             1 0.003388400 53.09728          52.53227
+## sas_05              2 0.003331664 52.97355          52.50780
+## phq_03             12 0.003286658 52.61150          51.98602
+## dass_02             0 0.003301581 52.46602          51.81014
+## sas_15              0 0.003296275 52.13075          51.58019
+## cesd_12            53 0.003296921 51.77073          51.20715
+## hads_10             1 0.003241431 51.72416          51.11984
+## sas_09              0 0.003224010 50.73023          50.17564
+## sas_11              0 0.003217828 50.70392          50.04507
+## sas_12              0 0.003207713 50.50690          49.90328
+## dass_07             0 0.003193651 50.43371          50.04382
+## cesd_19             5 0.003148846 49.87952          49.23213
+## hads_14             0 0.003107213 49.33823          48.77632
+## cesd_09             0 0.003048508 48.49581          48.11945
+## sas_06              0 0.002900075 46.21623          45.53144
+## sas_10              0 0.002943170 46.13589          45.73820
+## cesd_15             0 0.002867918 45.30223          45.03493
+## sas_14              0 0.002851414 44.58144          44.08725
+## cesd_01             2 0.002777187 42.74144          42.16380
+## sas_13              0 0.002634876 41.49381          40.92050
+## qids_01             0 0.002472004 38.55671          38.03457
+## cesd_18            54 0.002465097 38.02216          37.62203
+## hads_11             0 0.002340342 36.32468         -36.32468
+## qids_06             7 0.002086622 31.89005          30.88587
+## hads_09             0 0.001943953 29.45306          28.99017
+## qids_03             0 0.001790776 26.86590          26.61916
+## qids_09             1 0.001643137 24.06010          22.96374
+## cesd_11             0 0.001720255 23.87546          23.63657
+## qids_07             0 0.001683269 21.98051          21.00595
+## qids_08             0 0.001535180 21.80473          20.94286
+## qids_02             0 0.001517898 18.92350          18.57312
+## qids_04             0 0.001251495 14.29942          14.14807
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(top\_str, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Strength)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_area}\NormalTok{(}\AttributeTok{stat =} \StringTok{"bin"}\NormalTok{, }\AttributeTok{bins =} \DecValTok{30}\NormalTok{, }\AttributeTok{fill =} \StringTok{"skyblue"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution of Strength Values"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Strength"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\#\#\#\#Betweenness
+
+A node with high betweenness is a node that tends to connect clusters of
+nodes together (Deserno et al., 2022). In our investigation, there is a
+significant difference between the top 5 and all the rest, which
+indicates that only certain items, and therefore only certain symptoms,
+act as bridges between the different clusters. These items indicate the
+constructs of weight/appetite issues, sleep issues and suicidal
+thoughts. They essentially act as bridges between the most central nodes
+and the peripherical nodes, which, in turn are have an importantantly
+low value for closenness. In our case, the peripheral items (low
+closenness) are connected to the strong central items through the ones
+having high betweenness values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{top\_bet }\OtherTok{\textless{}{-}}\NormalTok{cent\_table\_spear}\SpecialCharTok{$}\NormalTok{node.centrality }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Betweenness)) }
+
+\FunctionTok{head}\NormalTok{(top\_bet, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           Betweenness   Closeness Strength ExpectedInfluence
+## phq_09            105 0.003422915 54.87306          54.54851
+## cesd_05            87 0.003403429 54.43822          53.76546
+## phq_05             82 0.003644281 57.56202          56.90769
+## cesd_18            54 0.002465097 38.02216          37.62203
+## cesd_12            53 0.003296921 51.77073          51.20715
+## hads_13            16 0.003799790 60.91073          60.23454
+## qids_14            13 0.003707683 59.04593          58.36471
+## phq_03             12 0.003286658 52.61150          51.98602
+## promis_17           8 0.004043714 67.71474          66.99984
+## qids_06             7 0.002086622 31.89005          30.88587
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#tail(top\_bet, 10)}
+
+\CommentTok{\#head(cent\_table\_spear$node.centrality \%\textgreater{}\%arrange(Betweenness, Strength), 10)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Top 10 Betweenness }\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Top 10 Betweenness
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{questions[}\FunctionTok{c}\NormalTok{(}\FunctionTok{which}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(df\_anx\_dp\_adj) }\SpecialCharTok{\%in\%} \FunctionTok{sort}\NormalTok{(}\FunctionTok{row.names}\NormalTok{(top\_bet)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{])))] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $cesd_05
+## [1] "Su sueño era inquieto"
+## 
+## $cesd_12
+## [1] "Sentía que se movía muy lento"
+## 
+## $cesd_18
+## [1] "Perdió peso sin intentarlo"
+## 
+## $phq_03
+## [1] "Tener problemas para dormir o mantenerse dormido, o dormir demasiado"
+## 
+## $phq_05
+## [1] "Tener poco apetito o comer en exceso"
+## 
+## $phq_09
+## [1] "Tener pensamientos sobre estar muerto(a) o sobre hacerse daño a sí mismo(a) de alguna manera"
+## 
+## $promis_17
+## [1] "Me sentí desanimado/a acerca del futuro"
+## 
+## $qids_06
+## [1] "Ha habido disminución del apetito"
+## 
+## $qids_14
+## [1] "Nivel de energía"
+## 
+## $hads_13
+## [1] "Me asaltan sentimientos repentinos de pánico"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Bottom Betweenness: 83 items had betweenness = 0 }\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Bottom Betweenness: 83 items had betweenness = 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#which(colnames(df\_anx\_dp\_adj) \%in\% sort(row.names(top\_bet)[1:40]))}
+\end{Highlighting}
+\end{Shaded}
+
+\#\#\#\#Closeness
+
+Closeness quantifies how far removed a node is from every other node in
+the network (Deserno et al., 2022). As mentioned above, low closenness
+means being more peripheral. In our network, given that the
+intercorrelation between strength and closenness is almost perfect, if a
+node is strong it is within a central cluster, well connected to the
+other local nodes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{top\_clo }\OtherTok{\textless{}{-}}\NormalTok{ cent\_table\_spear}\SpecialCharTok{$}\NormalTok{node.centrality }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Closeness)) }
+
+\NormalTok{bottom\_clo }\OtherTok{\textless{}{-}}\NormalTok{ cent\_table\_spear}\SpecialCharTok{$}\NormalTok{node.centrality }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{arrange}\NormalTok{(Closeness)}
+
+\FunctionTok{head}\NormalTok{(top\_clo, }\DecValTok{10}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           Betweenness   Closeness Strength ExpectedInfluence
+## promis_05           1 0.004365505 72.76541          72.10187
+## promis_28           2 0.004349012 71.62770          70.87923
+## promis_21           4 0.004315606 71.70724          71.02427
+## promis_15           0 0.004311767 71.46486          70.77000
+## promis_03           2 0.004262541 70.38916          69.75880
+## promis_24           0 0.004251037 70.55769          69.92529
+## promis_16           0 0.004247373 69.84445          69.13925
+## promis_02           0 0.004246198 70.95327          70.28330
+## promis_07           0 0.004234416 70.41204          69.67582
+## promis_26           1 0.004227029 70.03546          69.46545
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tail}\NormalTok{(top\_clo, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Betweenness   Closeness Strength ExpectedInfluence
+## hads_11           0 0.002340342 36.32468         -36.32468
+## qids_06           7 0.002086622 31.89005          30.88587
+## hads_09           0 0.001943953 29.45306          28.99017
+## qids_03           0 0.001790776 26.86590          26.61916
+## cesd_11           0 0.001720255 23.87546          23.63657
+## qids_07           0 0.001683269 21.98051          21.00595
+## qids_09           1 0.001643137 24.06010          22.96374
+## qids_08           0 0.001535180 21.80473          20.94286
+## qids_02           0 0.001517898 18.92350          18.57312
+## qids_04           0 0.001251495 14.29942          14.14807
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Top 10 Closenness }\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Top 10 Closenness
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#questions[c("promis\_05", "promis\_28", "promis\_21","promis\_15", "promis\_03")]}
+\NormalTok{questions[}\FunctionTok{c}\NormalTok{(}\FunctionTok{which}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(df\_anx\_dp\_adj) }\SpecialCharTok{\%in\%} \FunctionTok{sort}\NormalTok{(}\FunctionTok{row.names}\NormalTok{(top\_clo)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{])))] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $promis_02
+## [1] "Sentí que nada me ilusionaba"
+## 
+## $promis_03
+## [1] "Me sentí indefenso/a (que no podía hacer nada para ayudarme)"
+## 
+## $promis_05
+## [1] "Sentí que nada me podía animar"
+## 
+## $promis_07
+## [1] "Me sentí triste"
+## 
+## $promis_15
+## [1] "Me sentí deprimido/a"
+## 
+## $promis_16
+## [1] "Tuve problemas para tomar decisiones"
+## 
+## $promis_21
+## [1] "Me sentí desesperanzado/a"
+## 
+## $promis_24
+## [1] "Sentí que nada me interesaba"
+## 
+## $promis_26
+## [1] "Sentí que mi vida estaba vacía"
+## 
+## $promis_28
+## [1] "Me sentí completamente agotado/a emocionalmente"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Bottom 10 Closenness }\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Bottom 10 Closenness
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{questions[}\FunctionTok{c}\NormalTok{(}\FunctionTok{which}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(df\_anx\_dp\_adj) }\SpecialCharTok{\%in\%} \FunctionTok{sort}\NormalTok{(}\FunctionTok{row.names}\NormalTok{(bottom\_clo)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{])))] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $cesd_11
+## [1] "Dormía más de lo habitual"
+## 
+## $qids_02
+## [1] "Sueño nocturno alterado"
+## 
+## $qids_03
+## [1] "Despertarse demasiado temprano"
+## 
+## $qids_04
+## [1] "Dormir demasiado"
+## 
+## $qids_06
+## [1] "Ha habido disminución del apetito"
+## 
+## $qids_07
+## [1] "Ha habido aumento del apetito"
+## 
+## $qids_08
+## [1] "Ha habido pérdida de peso"
+## 
+## $qids_09
+## [1] "Ha habido aumento de peso"
+## 
+## $hads_09
+## [1] "Tengo una sensación extraña, como si tuviera mariposas en el estómago"
+## 
+## $hads_11
+## [1] "Me siento inquieto/a, como si no pudiera parar de moverme"
+\end{verbatim}
+
+\paragraph{Intercorrelation of Centrality
+Measures:}\label{intercorrelation-of-centrality-measures}
+
+High intercorrelations suggest that certain centrality measures may be
+capturing similar network properties and these intercorrelations are
+loud and clear: Strength and Closenness are intercorrelated almost
+perfectly, while Betweenness has nearly no correlation with them.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Correlation of the measures}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Correlation of the measures
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Strength x Closeness: "}\NormalTok{, }\FunctionTok{cor}\NormalTok{(cent\_table\_spear}\SpecialCharTok{$}\NormalTok{node.centrality}\SpecialCharTok{$}\NormalTok{Strength, cent\_table\_spear}\SpecialCharTok{$}\NormalTok{node.centrality}\SpecialCharTok{$}\NormalTok{Closeness, }\AttributeTok{method=}\StringTok{"spearman"}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Strength x Closeness:  0.9969303
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Strength x Betweenness: "}\NormalTok{,}\FunctionTok{cor}\NormalTok{(cent\_table\_spear}\SpecialCharTok{$}\NormalTok{node.centrality}\SpecialCharTok{$}\NormalTok{Strength, cent\_table\_spear}\SpecialCharTok{$}\NormalTok{node.centrality}\SpecialCharTok{$}\NormalTok{Betweenness, }\AttributeTok{method=}\StringTok{"spearman"}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Strength x Betweenness:  -0.01877488
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Betweenness x Closeness: "}\NormalTok{,}\FunctionTok{cor}\NormalTok{(cent\_table\_spear}\SpecialCharTok{$}\NormalTok{node.centrality}\SpecialCharTok{$}\NormalTok{Betweenness, cent\_table\_spear}\SpecialCharTok{$}\NormalTok{node.centrality}\SpecialCharTok{$}\NormalTok{Closeness, }\AttributeTok{method=}\StringTok{"spearman"}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Betweenness x Closeness:  2.325542e-05
+\end{verbatim}
+
+Joining closenness and strength. There is no meaning in creating a
+bottom 5 for betweenness since there are 83 nodes (67\%) having zero as
+value for this measure.Instead, we will merge strength and closenness
+only for visualization purposes and explore the 15 top and bottom
+closenness/strength nodes. Also, we will visualize all the nodes that
+have a betweenness value bigger than zero.
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\subsubsection{Clustering}\label{clustering}
+
+We have been talking a lot about clustering, so it is time to start
+investigating this feature. The clustering coefficient measures how
+tightly connected the neighbors of a node are. High values indicate that
+a node's neighbors are also likely to be connected, forming local
+clusters of related symptoms.
+
+\paragraph{Clustering Coefficient}\label{clustering-coefficient}
+
+Clustering measures, such as Onnela, Zhang, and WS, are statistical
+techniques used to identify groups or clusters within a dataset. These
+methods help uncover hidden patterns and relationships between data
+points. In the context of symptom networks, these measures can be used
+to group similar symptoms together. Onnela's clustering coefficient is
+more sensitive to the overall network structure, capturing subtle
+clustering patterns (Constantini et al., 2015). Zhang and Horvath's
+method focuses on identifying densely connected modules, while Watts and
+Strogatz's transitivity emphasizes local clustering and the formation of
+triangles(Constantini et al., 2015).
+
+In our network, it is possible to see that a high clustering
+coefficient, specially in WS and Zhang plots. All methods detect
+consistent clusters for some items, especially in the SAS, QIDS, and
+CESD scales, where items related to sleep, appetite/weight, and somatic
+issues tend to vary more than the other items. We have already seen that
+these type of items tend to be either peripheral (low strength and
+closenness) or bridges the periphery (betweenness).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creating a copy of the symptom similarity matrix}
+\NormalTok{cl\_symp }\OtherTok{\textless{}{-}}\NormalTok{ symp\_spear}
+
+\CommentTok{\# Making the matrix symmetric by copying the upper triangle to the lower triangle}
+\NormalTok{cl\_symp[}\FunctionTok{upper.tri}\NormalTok{(cl\_symp)] }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(cl\_symp)[}\FunctionTok{upper.tri}\NormalTok{(cl\_symp)]}
+
+\CommentTok{\# Creating a clustering plot based on the symmetric similarity matrix}
+\FunctionTok{clusteringPlot}\NormalTok{(cl\_symp, }\AttributeTok{signed =}\NormalTok{ T, }\AttributeTok{decreasing =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\subsubsection{Density and Small-Worldness (Transitivity, APL - Average
+Path Length, Small-World
+Index):}\label{density-and-small-worldness-transitivity-apl---average-path-length-small-world-index}
+
+Network density refers to the proportion of possible edges that are
+actually present. Small-worldness combines transitivity (the likelihood
+that two connected nodes share a neighbor) and average path length (the
+average number of steps between two nodes) to determine if the network
+has a small-world structure, where symptoms are highly clustered but
+still have short paths between them.
+
+A transitivity of 0.46 means that around 46\% of all possible
+connections between nodes are present. This indicates a relatively
+well-connected network but not saturated. The value of observed
+transitivity (1) compared to a random network (0.99) suggests a strong
+clustering structure. The APL 1 means that most nodes are directly
+connected. It is slightly shorter than the APL in a random network
+(1.38). The nodes are directly connected, which is slightly shorter than
+the APL in a random network (1.38). ⁤⁤The small-world index of 1.39
+indicates that the network combines high clustering with short paths
+between nodes and this makes efficient connections within clusters
+possible.
+
+\paragraph{Density and smallworldness}\label{density-and-smallworldness}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Density: }
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Density: "}\NormalTok{, }\FunctionTok{mean}\NormalTok{(symp\_spear[}\FunctionTok{lower.tri}\NormalTok{(symp\_spear)]), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Density:  0.4647429
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#APL, transitivity and small{-}worldness: }
+\FunctionTok{smallworldIndex}\NormalTok{(}\FunctionTok{qgraph}\NormalTok{(symp\_spear))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-24-1.pdf}
+
+\begin{verbatim}
+## $transitivity
+## [1] 1
+## 
+## $transitivity_random
+## [1] 0.9918699
+## 
+## $APL
+## [1] 1
+## 
+## $APL_random
+## [1] 1.381547
+## 
+## $index
+## [1] 1.392871
+\end{verbatim}
+
+\subsection{Groups of symptoms based on core symptoms from
+DSM-V-TR}\label{groups-of-symptoms-based-on-core-symptoms-from-dsm-v-tr}
+
+\href{12\%20core\%20DSM-V-TR\%20symptoms\%20present\%20in\%20the\%20scales}{\includegraphics{images/venn2.PNG}}
+
+descripción de los síntomas y su atribución
+
+quizás añadir qgraph con grupos separados por síntomas
+
+\subsection{Louvain Communities}\label{louvain-communities}
+
+Explicar el concepto de louvain Explicar el concepto de modularidad
+
+\subsubsection{Creating the absolute values adjacency
+matrix}\label{creating-the-absolute-values-adjacency-matrix}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Converting the correlation matrix into an adjacency matrix}
+\NormalTok{adj\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(symp\_spear)}
+
+\CommentTok{\# threshold to binarize the matrix (only keep strong correlations)}
+\CommentTok{\#adj\_matrix[abs(adj\_matrix) \textless{} 0.3] \textless{}{-} 0  \# Set a threshold of 0.3 (or adjust as needed)}
+
+\CommentTok{\# attribute abs values to negative edges}
+\NormalTok{adj\_matrix[adj\_matrix }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{abs}\NormalTok{(adj\_matrix[adj\_matrix }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{])}
+
+\CommentTok{\# Converting the adjacency matrix to an igraph object}
+\NormalTok{graph\_symp }\OtherTok{\textless{}{-}} \FunctionTok{graph\_from\_adjacency\_matrix}\NormalTok{(adj\_matrix, }\AttributeTok{mode =} \StringTok{"undirected"}\NormalTok{, }\AttributeTok{weighted =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{diag =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Refining the resolution}\label{refining-the-resolution}
+
+Changing resolution levels in order to find the most fine-grained set of
+communities. Counting the number of symptoms represented in all scales
+we arrived at 15 core symptoms related or not to DSM-V-TR. Using
+resolutions between 1.05 to 1.1 creates communities from 8 to 17
+communities. Therefore, the idea of employing this range comes from the
+estimation of 15 main symptoms that we classified earlier. ** ESCRIBIR
+SÍNTOMAS / PROFUNDIZAR
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Running the Louvain algorithm 41 times to detect communities with a slowly growing modularity}
+\NormalTok{decseq }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \FloatTok{1.05}\NormalTok{, }\AttributeTok{to =} \FloatTok{1.1}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.00025}\NormalTok{)}
+\NormalTok{templist }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+
+\CommentTok{\# For loop to get all results as new columns}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ decseq)\{}
+\NormalTok{  louvain\_commu\_temp }\OtherTok{\textless{}{-}} \FunctionTok{cluster\_louvain}\NormalTok{(graph\_symp, }\AttributeTok{resolution =}\NormalTok{ i)}
+\NormalTok{  comm\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{membership}\NormalTok{(louvain\_commu\_temp))}
+  
+\NormalTok{  templist[[}\FunctionTok{as.character}\NormalTok{(i)]] }\OtherTok{\textless{}{-}}\NormalTok{ comm\_df\}}
+
+\NormalTok{louvain\_rep }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(templist)}
+\NormalTok{tlouvain }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(louvain\_rep)}
+
+
+\CommentTok{\#write.xlsx(as.data.frame(tlouvain), "louvain.xlsx", rowNames = TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Choosing the best
+communities}\label{choosing-the-best-communities}
+
+Find which result has the best correlation from all communities
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Obtaining correlations}
+\NormalTok{correlation\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(louvain\_rep, }\AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+\NormalTok{clou }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(correlation\_matrix)}
+
+\CommentTok{\#}
+\CommentTok{\#colnames(clou)}
+\CommentTok{\# summing each column {-} summing is enough because all correlations are positive and have self cor values}
+\NormalTok{l }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{colnames}\NormalTok{(clou))\{}
+  \FunctionTok{cat}\NormalTok{(i, }\StringTok{" = "}\NormalTok{,}\FunctionTok{sum}\NormalTok{(clou[[i]]), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{  l }\OtherTok{\textless{}{-}} \FunctionTok{append}\NormalTok{(l, }\FunctionTok{sum}\NormalTok{(clou[[i]]))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## x  =  150.0512 
+## x.1  =  86.91847 
+## x.2  =  145.0386 
+## x.3  =  148.1955 
+## x.4  =  144.4036 
+## x.5  =  148.1955 
+## x.6  =  166.0505 
+## x.7  =  144.4036 
+## x.8  =  144.4036 
+## x.9  =  145.0386 
+## x.10  =  151.2141 
+## x.11  =  106.0144 
+## x.12  =  98.21327 
+## x.13  =  106.0144 
+## x.14  =  141.7053 
+## x.15  =  139.9899 
+## x.16  =  125.9182 
+## x.17  =  144.4036 
+## x.18  =  145.0386 
+## x.19  =  146.3934 
+## x.20  =  137.4432 
+## x.21  =  153.06 
+## x.22  =  141.3561 
+## x.23  =  159.9188 
+## x.24  =  164.9384 
+## x.25  =  102.0587 
+## x.26  =  106.0144 
+## x.27  =  98.00002 
+## x.28  =  166.5386 
+## x.29  =  159.9952 
+## x.30  =  153.06 
+## x.31  =  141.7234 
+## x.32  =  148.3663 
+## x.33  =  146.3934 
+## x.34  =  139.1027 
+## x.35  =  147.8963 
+## x.36  =  146.3934 
+## x.37  =  151.2141 
+## x.38  =  168.218 
+## x.39  =  165.8145 
+## x.40  =  148.4588 
+## x.41  =  142.8205 
+## x.42  =  138.6498 
+## x.43  =  142.8205 
+## x.44  =  165.8145 
+## x.45  =  143.8279 
+## x.46  =  142.8205 
+## x.47  =  168.218 
+## x.48  =  166.8474 
+## x.49  =  151.2141 
+## x.50  =  142.8205 
+## x.51  =  145.8261 
+## x.52  =  160.1606 
+## x.53  =  166.1656 
+## x.54  =  142.4329 
+## x.55  =  169.1198 
+## x.56  =  165.8751 
+## x.57  =  169.1246 
+## x.58  =  167.9812 
+## x.59  =  163.7674 
+## x.60  =  164.9352 
+## x.61  =  156.6877 
+## x.62  =  148.5018 
+## x.63  =  163.21 
+## x.64  =  148.5018 
+## x.65  =  144.6695 
+## x.66  =  162.4698 
+## x.67  =  150.0976 
+## x.68  =  150.3435 
+## x.69  =  132.1573 
+## x.70  =  163.21 
+## x.71  =  143.8915 
+## x.72  =  162.36 
+## x.73  =  135.2534 
+## x.74  =  163.555 
+## x.75  =  164.1931 
+## x.76  =  165.5293 
+## x.77  =  165.5293 
+## x.78  =  46.19869 
+## x.79  =  163.9511 
+## x.80  =  168.9856 
+## x.81  =  171.3497 
+## x.82  =  166.4445 
+## x.83  =  131.5738 
+## x.84  =  168.7345 
+## x.85  =  141.7079 
+## x.86  =  168.3634 
+## x.87  =  167.5508 
+## x.88  =  167.1203 
+## x.89  =  168.3195 
+## x.90  =  166.7079 
+## x.91  =  167.6884 
+## x.92  =  168.3634 
+## x.93  =  167.6884 
+## x.94  =  168.7767 
+## x.95  =  161.9512 
+## x.96  =  170.2783 
+## x.97  =  167.6884 
+## x.98  =  167.253 
+## x.99  =  170.9212 
+## x.100  =  170.2783 
+## x.101  =  162.9905 
+## x.102  =  167.5244 
+## x.103  =  165.7521 
+## x.104  =  168.0643 
+## x.105  =  169.6433 
+## x.106  =  164.2818 
+## x.107  =  172.2502 
+## x.108  =  165.1378 
+## x.109  =  171.0213 
+## x.110  =  168.3792 
+## x.111  =  168.9202 
+## x.112  =  170.1779 
+## x.113  =  170.1844 
+## x.114  =  167.0424 
+## x.115  =  164.7249 
+## x.116  =  169.3205 
+## x.117  =  142.0456 
+## x.118  =  165.1007 
+## x.119  =  169.5734 
+## x.120  =  170.1596 
+## x.121  =  170.4229 
+## x.122  =  166.3972 
+## x.123  =  162.2151 
+## x.124  =  136.8291 
+## x.125  =  168.403 
+## x.126  =  172.4335 
+## x.127  =  171.6411 
+## x.128  =  162.7232 
+## x.129  =  170.7825 
+## x.130  =  64.92481 
+## x.131  =  171.6411 
+## x.132  =  172.3611 
+## x.133  =  171.1987 
+## x.134  =  170.9784 
+## x.135  =  156.7919 
+## x.136  =  169.7458 
+## x.137  =  172.6135 
+## x.138  =  172.9804 
+## x.139  =  173.2353 
+## x.140  =  171.9489 
+## x.141  =  162.807 
+## x.142  =  149.874 
+## x.143  =  171.998 
+## x.144  =  171.0238 
+## x.145  =  163.4276 
+## x.146  =  170.9068 
+## x.147  =  169.7866 
+## x.148  =  88.51036 
+## x.149  =  157.529 
+## x.150  =  162.954 
+## x.151  =  171.448 
+## x.152  =  164.7388 
+## x.153  =  169.8647 
+## x.154  =  165.1064 
+## x.155  =  172.8904 
+## x.156  =  171.6401 
+## x.157  =  171.5207 
+## x.158  =  170.284 
+## x.159  =  162.4284 
+## x.160  =  171.1102 
+## x.161  =  152.1521 
+## x.162  =  171.2214 
+## x.163  =  155.6202 
+## x.164  =  169.3939 
+## x.165  =  118.1083 
+## x.166  =  168.2039 
+## x.167  =  166.5189 
+## x.168  =  172.1858 
+## x.169  =  170.284 
+## x.170  =  157.0715 
+## x.171  =  152.1581 
+## x.172  =  166.8646 
+## x.173  =  173.0115 
+## x.174  =  167.7343 
+## x.175  =  171.1017 
+## x.176  =  170.9206 
+## x.177  =  172.4764 
+## x.178  =  136.9115 
+## x.179  =  173.0697 
+## x.180  =  159.0943 
+## x.181  =  163.453 
+## x.182  =  157.4526 
+## x.183  =  166.7138 
+## x.184  =  171.3073 
+## x.185  =  157.6184 
+## x.186  =  167.3521 
+## x.187  =  157.5549 
+## x.188  =  157.5549 
+## x.189  =  156.776 
+## x.190  =  156.8088 
+## x.191  =  170.3032 
+## x.192  =  167.6603 
+## x.193  =  173.2236 
+## x.194  =  170.3484 
+## x.195  =  162.0409 
+## x.196  =  169.9611 
+## x.197  =  173.8528 
+## x.198  =  165.7221 
+## x.199  =  163.746 
+## x.200  =  160.7241
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#value with the strongest correlations from all}
+\NormalTok{clou[}\FunctionTok{which.max}\NormalTok{(}\FunctionTok{unlist}\NormalTok{(l))] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           x.197
+## x     0.7829956
+## x.1   0.5037434
+## x.2   0.7499704
+## x.3   0.7730168
+## x.4   0.7498843
+## x.5   0.7730168
+## x.6   0.9304422
+## x.7   0.7498843
+## x.8   0.7498843
+## x.9   0.7499704
+## x.10  0.7911360
+## x.11  0.5464325
+## x.12  0.4957089
+## x.13  0.5464325
+## x.14  0.7235154
+## x.15  0.7174582
+## x.16  0.6953857
+## x.17  0.7498843
+## x.18  0.7499704
+## x.19  0.7680693
+## x.20  0.7537533
+## x.21  0.8053980
+## x.22  0.7245999
+## x.23  0.8712440
+## x.24  0.9022109
+## x.25  0.5201542
+## x.26  0.5464325
+## x.27  0.5024572
+## x.28  0.9313911
+## x.29  0.8792246
+## x.30  0.8053980
+## x.31  0.7226016
+## x.32  0.7756145
+## x.33  0.7680693
+## x.34  0.7089456
+## x.35  0.7783104
+## x.36  0.7680693
+## x.37  0.7911360
+## x.38  0.9295090
+## x.39  0.9208136
+## x.40  0.7836248
+## x.41  0.7360802
+## x.42  0.7671673
+## x.43  0.7360802
+## x.44  0.9208136
+## x.45  0.7508455
+## x.46  0.7360802
+## x.47  0.9295090
+## x.48  0.9176257
+## x.49  0.7911360
+## x.50  0.7360802
+## x.51  0.7605759
+## x.52  0.8821910
+## x.53  0.9309929
+## x.54  0.7392323
+## x.55  0.9498472
+## x.56  0.9175764
+## x.57  0.9592605
+## x.58  0.9106184
+## x.59  0.9222725
+## x.60  0.9304522
+## x.61  0.8443233
+## x.62  0.7820952
+## x.63  0.8915262
+## x.64  0.7820952
+## x.65  0.7695370
+## x.66  0.8993878
+## x.67  0.7929125
+## x.68  0.8028103
+## x.69  0.7450194
+## x.70  0.8915262
+## x.71  0.7551372
+## x.72  0.8874652
+## x.73  0.7571388
+## x.74  0.9232878
+## x.75  0.9279423
+## x.76  0.9235413
+## x.77  0.9235413
+## x.78  0.3002378
+## x.79  0.9143615
+## x.80  0.9458373
+## x.81  0.9675864
+## x.82  0.9179136
+## x.83  0.7415721
+## x.84  0.9512298
+## x.85  0.7837018
+## x.86  0.9506618
+## x.87  0.9301278
+## x.88  0.9188082
+## x.89  0.9432981
+## x.90  0.9195775
+## x.91  0.9333751
+## x.92  0.9506618
+## x.93  0.9333751
+## x.94  0.9665235
+## x.95  0.8748466
+## x.96  0.9572875
+## x.97  0.9333751
+## x.98  0.9356783
+## x.99  0.9664379
+## x.100 0.9572875
+## x.101 0.8860249
+## x.102 0.9351468
+## x.103 0.9070355
+## x.104 0.9306148
+## x.105 0.9317327
+## x.106 0.9101521
+## x.107 0.9748253
+## x.108 0.9338949
+## x.109 0.9610248
+## x.110 0.9217427
+## x.111 0.9396234
+## x.112 0.9701596
+## x.113 0.9469250
+## x.114 0.9160914
+## x.115 0.9010476
+## x.116 0.9378564
+## x.117 0.8021420
+## x.118 0.9201712
+## x.119 0.9366672
+## x.120 0.9352058
+## x.121 0.9458122
+## x.122 0.9266496
+## x.123 0.8915918
+## x.124 0.7628464
+## x.125 0.9408622
+## x.126 0.9763107
+## x.127 0.9640545
+## x.128 0.9027981
+## x.129 0.9559378
+## x.130 0.3920193
+## x.131 0.9640545
+## x.132 0.9770469
+## x.133 0.9695968
+## x.134 0.9599702
+## x.135 0.8727690
+## x.136 0.9429876
+## x.137 0.9759135
+## x.138 0.9843482
+## x.139 0.9866087
+## x.140 0.9846479
+## x.141 0.9034364
+## x.142 0.8344740
+## x.143 0.9756615
+## x.144 0.9514003
+## x.145 0.9144407
+## x.146 0.9511007
+## x.147 0.9592542
+## x.148 0.5251412
+## x.149 0.8718467
+## x.150 0.9145240
+## x.151 0.9587377
+## x.152 0.9073647
+## x.153 0.9605651
+## x.154 0.9086929
+## x.155 0.9845725
+## x.156 0.9634679
+## x.157 0.9754583
+## x.158 0.9635223
+## x.159 0.8937592
+## x.160 0.9521007
+## x.161 0.8436435
+## x.162 0.9516278
+## x.163 0.8599048
+## x.164 0.9557214
+## x.165 0.6597321
+## x.166 0.9288137
+## x.167 0.9200436
+## x.168 0.9856871
+## x.169 0.9635223
+## x.170 0.8694018
+## x.171 0.8323557
+## x.172 0.9265951
+## x.173 0.9849569
+## x.174 0.9349802
+## x.175 0.9541966
+## x.176 0.9492098
+## x.177 0.9811801
+## x.178 0.7843518
+## x.179 0.9854122
+## x.180 0.8840017
+## x.181 0.8945686
+## x.182 0.8733809
+## x.183 0.9315037
+## x.184 0.9538465
+## x.185 0.8456625
+## x.186 0.9347515
+## x.187 0.8741251
+## x.188 0.8741251
+## x.189 0.8719571
+## x.190 0.8762889
+## x.191 0.9764572
+## x.192 0.9396639
+## x.193 0.9895386
+## x.194 0.9743919
+## x.195 0.8832310
+## x.196 0.9513738
+## x.197 1.0000000
+## x.198 0.9286463
+## x.199 0.9105485
+## x.200 0.8657738
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modularity }\OtherTok{\textless{}{-}}\NormalTok{ decseq[}\DecValTok{145}\NormalTok{]}
+\NormalTok{found\_solution }\OtherTok{\textless{}{-}}\NormalTok{ louvain\_rep[}\DecValTok{145}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Having found the fittest modularity, we could iterate it in order to
+find a consensus.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#comm\_consensus \textless{}{-} community.consensus(graph\_symp, resolution = modularity)}
+\CommentTok{\#cons \textless{}{-} as.data.frame(comm\_consensus)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Walktrap Communities}\label{walktrap-communities}
+
+Explicar el concepto de walktrap
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wt }\OtherTok{\textless{}{-}} \FunctionTok{cluster\_walktrap}\NormalTok{(graph\_symp)}
+\NormalTok{dfwt }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(wt}\SpecialCharTok{$}\NormalTok{membership)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_comm }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}../data/communities.csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{df\_comm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       n
+## 1    10
+## 2    21
+## 3    53
+## 4    95
+## 5    70
+## 6    85
+## 7    83
+## 8     1
+## 9    18
+## 10   63
+## 11   65
+## 12   25
+## 13   64
+## 14   66
+## 15    3
+## 16   20
+## 17   27
+## 18   67
+## 19   45
+## 20   82
+## 21   87
+## 22   36
+## 23    2
+## 24    4
+## 25    6
+## 26   22
+## 27   44
+## 28   62
+## 29    8
+## 30   37
+## 31   39
+## 32   46
+## 33   48
+## 34   31
+## 35   33
+## 36   34
+## 37   40
+## 38   43
+## 39   47
+## 40   50
+## 41   51
+## 42   52
+## 43   54
+## 44   55
+## 45   97
+## 46   99
+## 47  100
+## 48  101
+## 49   96
+## 50   84
+## 51   81
+## 52   16
+## 53   24
+## 54    7
+## 55   71
+## 56   57
+## 57  115
+## 58   72
+## 59   98
+## 60   77
+## 61   78
+## 62   80
+## 63   89
+## 64   94
+## 65  108
+## 66  110
+## 67  107
+## 68  111
+## 69   28
+## 70   13
+## 71   12
+## 72  112
+## 73   73
+## 74   88
+## 75   90
+## 76   91
+## 77   93
+## 78  102
+## 79  103
+## 80  104
+## 81  105
+## 82  106
+## 83  109
+## 84   11
+## 85   61
+## 86    5
+## 87   19
+## 88   23
+## 89   58
+## 90   59
+## 91   60
+## 92  123
+## 93   76
+## 94  113
+## 95  118
+## 96  114
+## 97  121
+## 98   74
+## 99   75
+## 100  79
+## 101  92
+## 102 116
+## 103 117
+## 104 119
+## 105 120
+## 106 122
+## 107  14
+## 108  15
+## 109  29
+## 110  69
+## 111  49
+## 112   9
+## 113  17
+## 114  26
+## 115  30
+## 116  35
+## 117  38
+## 118  41
+## 119  56
+## 120  68
+## 121  32
+## 122  42
+## 123  86
+##                                                                                                                                                     question
+## 1                                                                                                           Había perdido interés en sus actividades diarias
+## 2                                                                                                     Tener poco interés o disfrutar poco haciendo las cosas
+## 3                                                                                                                               Sentí que nada me interesaba
+## 4                                                                                                               Todavía disfruto con lo que antes me gustaba
+## 5                                                                                                                                            Interés general
+## 6                                                                                                                  He sido incapaz de entusiasmarse por nada
+## 7                                                                                                             He sentido que no había nada que me ilusionara
+## 8                                                                                                                                              Tenía apetito
+## 9                                                                                                                                 Perdió peso sin intentarlo
+## 10                                                                                                                         Ha habido disminución del apetito
+## 11                                                                                                                                 Ha habido pérdida de peso
+## 12                                                                                                                      Tener poco apetito o comer en exceso
+## 13                                                                                                                             Ha habido aumento del apetito
+## 14                                                                                                                                 Ha habido aumento de peso
+## 15                                                                                         Tenía dificultad para mantener su mente en lo que estaba haciendo
+## 16                                                                                                         Era difícil concentrarse en las cosas importantes
+## 17                                                            Tener dificultades para concentrarse en cosas tales como leer el periódico o ver la televisión
+## 18                                                                                                                          Concentración/Toma de decisiones
+## 19                                                                                                                      Tuve problemas para tomar decisiones
+## 20                                                                                                 Me ha resultado difícil tener iniciativa para hacer cosas
+## 21                                                                                                            He sentido que la vida no tenía ningún sentido
+## 22                                                                                                                                           Me sentí triste
+## 23                                                                                                                             No podía quitarse la tristeza
+## 24                                                                                                                                     Se sentía deprimido/a
+## 25                                                                                                                                          Se sintió triste
+## 26                                                                                                        Sentirse desanimado/a, deprimido/a o sin esperanza
+## 27                                                                                                                                      Me sentí deprimido/a
+## 28                                                                                                                                           Sentirse triste
+## 29                                                                                                                                       Nada le hacía feliz
+## 30                                                                                                              Sentí que quería darme por vencido/a en todo
+## 31                                                                                                                                      Me sentí fracasado/a
+## 32                                                                                                                   Me sentí desanimado/a acerca del futuro
+## 33                                                                                                                                    Me sentí descontento/a
+## 34                                                                                                                              Sentí que nada me ilusionaba
+## 35                                                                                                                                 Me distancié de los demás
+## 36                                                                                                                            Sentí que nada me podía animar
+## 37                                                                                      Me costó trabajo sentir una relación estrecha (cercana) con la gente
+## 38                                                                                                                                           Me sentí solo/a
+## 39                                                                                            Descubrí que había cosas en mi vida que eran demasiado para mí
+## 40                                                                                                                                 Me sentí desesperanzado/a
+## 41                                                                                                                       Sentí que la gente no me hacía caso
+## 42                                                                                                                   Me sentí angustiado/a sin ningún motivo
+## 43                                                                                                  Me sentí pesimista (que veía las cosas de modo negativo)
+## 44                                                                                                                            Sentí que mi vida estaba vacía
+## 45                                                                                                                                          Me siento alegre
+## 46                                                                                                                 He perdido interés en mi aspecto personal
+## 47                                                                                                                    Me siento optimista respecto al futuro
+## 48                                                                                      Me divierto con un buen libro, la radio, o un programa de televisión
+## 49                                                                                                         Puedo reírme y ver el lado divertido de las cosas
+## 50                                                                                                                       Me he sentido desanimado/a y triste
+## 51                                                                                                              No he podido sentir ninguna emoción positiva
+## 52                                                                                                                        Se sentía cansado/a todo el tiempo
+## 53                                                                                                                   Sentirse cansado/a o tener poca energía
+## 54                                                                                                                              No tenía ganas de hacer nada
+## 55                                                                                                                                          Nivel de energía
+## 56                                                                                                           Me sentí completamente agotado/a emocionalmente
+## 57                                                                                                                     Me siento débil y me canso fácilmente
+## 58                                                                                                                             Sentimiento de mayor lentitud
+## 59                                                                                                         Me siento como si cada día estuviera más lento/a.
+## 60                                                        He estado preocupado/a por situaciones en las que pudiera ser presa del pánico y hacer el ridículo
+## 61                                                                                                                 He sentido que estaba al borde del pánico
+## 62                                                                                                            Me he sentido asustado/a sin una razón de peso
+## 63                                                                                    Tengo una sensación de miedo, como si algo horrible me fuera a suceder
+## 64                                                                                                              Me asaltan sentimientos repentinos de pánico
+## 65                                                                                                    Ha tenido miedo, como si fuera a suceder algo terrible
+## 66                                                                                                                              Me da miedo sin razón alguna
+## 67                                                                                                                   Se ha irritado o enfadado con facilidad
+## 68                                                                                                                       Me enojo fácilmente o siento pánico
+## 69  Moverse o hablar tan lentamente que los demás lo han notado. O bien al contrario, estar tan agitado/a o inquieto/a que se mueve mucho más de lo habitual
+## 70                                                                                                                                       Se sentía agitado/a
+## 71                                                                                                                             Sentía que se movía muy lento
+## 72                                                                                                                          Siento que me estoy desmoronando
+## 73                                                                                                                                    Sensación de inquietud
+## 74                                                                                                                            Me siento tenso/a o nervioso/a
+## 75                                                                                                                    Tengo mi mente llena de preocupaciones
+## 76                                                                                              Puedo estar sentado/a confortablemente y sentirme relajado/a
+## 77                                                                                                 Me siento inquieto/a, como si no pudiera parar de moverme
+## 78                                                                                                      Se ha sentido nervioso/a, ansioso/a o muy alterado/a
+## 79                                                                                                                         No ha podido dejar de preocuparse
+## 80                                                                                                       Se ha preocupado excesivamente por diferentes cosas
+## 81                                                                                                                       Ha tenido dificultad para relajarse
+## 82                                                                                        Se ha sentido tan intranquilo/a que no ha podido quedarse quieto/a
+## 83                                                                                                     Me siento más nervioso/a y ansioso/a que de costumbre
+## 84                                                                                                                                 Dormía más de lo habitual
+## 85                                                                                                                                          Dormir demasiado
+## 86                                                                                                                                     Su sueño era inquieto
+## 87                                                                                                                           Le costaba mucho trabajo dormir
+## 88                                                                                      Tener problemas para dormir o mantenerse dormido, o dormir demasiado
+## 89                                                                                                                           Problemas a la hora de dormirse
+## 90                                                                                                                                   Sueño nocturno alterado
+## 91                                                                                                                            Despertarse demasiado temprano
+## 92                                                                                                                                          Tengo pesadillas
+## 93                                                                                                                 He tenido temblores (p.ej., en las manos)
+## 94                                                                                                                             Mis brazos y piernas tiemblan
+## 95                                                                                                                    Tengo desmayos o sensación de desmayos
+## 96                                                                                              Me molestan los dolores de cabeza, cuello y dolor de espalda
+## 97                                                                                                                 Tengo que vaciar mi vejiga con frecuencia
+## 98                                                                                                                                    He notado la boca seca
+## 99                          He tenido dificultades para respirar (p.ej., respiración excesivamente rápida, falta de aliento sin haber hecho esfuerzo físico)
+## 100                                             He notado mi corazón sin hacer esfuerzo físico (p.ej., aumento del ritmo cardiaco, ausencia de algún latido)
+## 101                                                                                    Tengo una sensación extraña, como si tuviera mariposas en el estómago
+## 102                                                                                                                     Puedo sentir mi corazón latir rápido
+## 103                                                                                                                                   Me molestan los mareos
+## 104                                                                               Tengo sensación de entumecimiento y hormigueo en mis dedos de manos y pies
+## 105                                                                                                     Me molestan los dolores de estómago o la indigestión
+## 106                                                                                                           Se me calienta la cara y se me pone enrojecida
+## 107                                                                                                                          Sentía deseos de estar muerto/a
+## 108                                                                                                                                      Quería hacerse daño
+## 109                                                             Tener pensamientos sobre estar muerto(a) o sobre hacerse daño a sí mismo(a) de alguna manera
+## 110                                                                                                               Pensamientos sobre la muerte o el suicidio
+## 111                                                                                                              Sentí que no tenía ninguna razón para vivir
+## 112                                                                                                                          Sentía que era una mala persona
+## 113                                                                                                                        Estaba a disgusto consigo mismo/a
+## 114                                  Sentirse mal consigo mismo/a o sentirse fracasado/a, o pensar que se ha decepcionado a sí mismo/a o a los que le rodean
+## 115                                                                                                                                  Sentí que no valía nada
+## 116                                                                                                             Sentí que no valía tanto como otras personas
+## 117                                                                                                                Sentí que tenía la culpa de lo que pasaba
+## 118                                                                                                                    Me sentí decepcionado/a de mí mismo/a
+## 119                                                                                                                                        Me sentí culpable
+## 120                                                                                                                                    Opinión de sí mismo/a
+## 121                                                                                             Me sentí indefenso/a (que no podía hacer nada para ayudarme)
+## 122                                                                                                                            Sentí que nadie me necesitaba
+## 123                                                                                                               He sentido que no valía mucho como persona
+##         items     core_dsm_symptoms louvain_comm_consensus_r1.086
+## 1     cesd_10             anhedonia                             3
+## 2      phq_01             anhedonia                             3
+## 3   promis_24             anhedonia                             7
+## 4     hads_02             anhedonia                             8
+## 5     qids_13             anhedonia                             8
+## 6     dass_16             anhedonia                            11
+## 7     dass_10             anhedonia                            11
+## 8     cesd_01        apetite/weight                             1
+## 9     cesd_18        apetite/weight                             1
+## 10    qids_06        apetite/weight                             1
+## 11    qids_08        apetite/weight                             1
+## 12     phq_05        apetite/weight                             6
+## 13    qids_07        apetite/weight                             6
+## 14    qids_09        apetite/weight                             6
+## 15    cesd_03         concentration                             3
+## 16    cesd_20         concentration                             3
+## 17     phq_07         concentration                             3
+## 18    qids_10         concentration                             6
+## 19  promis_16         concentration                             7
+## 20    dass_05         concentration                            11
+## 21    dass_21        depressed mood                             1
+## 22  promis_07        depressed mood                             2
+## 23    cesd_02        depressed mood                             2
+## 24    cesd_04        depressed mood                             2
+## 25    cesd_06        depressed mood                             2
+## 26     phq_02        depressed mood                             2
+## 27  promis_15        depressed mood                             2
+## 28    qids_05        depressed mood                             2
+## 29    cesd_08        depressed mood                             3
+## 30  promis_08        depressed mood                             5
+## 31  promis_10        depressed mood                             5
+## 32  promis_17        depressed mood                             7
+## 33  promis_19        depressed mood                             7
+## 34  promis_02        depressed mood                             7
+## 35  promis_04        depressed mood                             7
+## 36  promis_05        depressed mood                             7
+## 37  promis_11        depressed Mood                             7
+## 38  promis_14        depressed mood                             7
+## 39  promis_18        depressed mood                             7
+## 40  promis_21        depressed mood                             7
+## 41  promis_22        depressed mood                             7
+## 42  promis_23        depressed mood                             7
+## 43  promis_25        depressed mood                             7
+## 44  promis_26        depressed mood                             7
+## 45    hads_06        depressed mood                             8
+## 46    hads_10        depressed mood                             8
+## 47    hads_12        depressed mood                             8
+## 48    hads_14        depressed mood                             8
+## 49    hads_04        depressed mood                             8
+## 50    dass_13        depressed mood                            11
+## 51    dass_03        depressed mood                            11
+## 52    cesd_16               fatigue                             3
+## 53     phq_04               fatigue                             3
+## 54    cesd_07               fatigue                             3
+## 55    qids_14               fatigue                             6
+## 56  promis_28               fatigue                             7
+## 57     sas_07               fatigue                             9
+## 58    qids_15               fatigue                             9
+## 59    hads_08               fatigue                             9
+## 60    dass_09         fear/keyed up                             9
+## 61    dass_15         fear/keyed up                             9
+## 62    dass_20         fear/keyed up                             9
+## 63    hads_03         fear/keyed up                             9
+## 64    hads_13         fear/keyed up                             9
+## 65     gad_07         fear/keyed up                             9
+## 66     sas_02         fear/keyed up                             9
+## 67     gad_06          Irritability                            10
+## 68     sas_03          Irritability                            10
+## 69     phq_08           psychomotor                             1
+## 70    cesd_13           psychomotor                             3
+## 71    cesd_12           psychomotor                             3
+## 72     sas_04 restlessness/keyed up                             9
+## 73    qids_16 restlessness/keyed up                            10
+## 74    hads_01 restlessness/keyed up                            10
+## 75    hads_05 restlessness/keyed up                            10
+## 76    hads_07 restlessness/keyed up                            10
+## 77    hads_11 restlessness/keyed up                            10
+## 78     gad_01 restlessness/keyed up                            10
+## 79     gad_02 restlessness/keyed up                            10
+## 80     gad_03 restlessness/keyed up                            10
+## 81     gad_04 restlessness/keyed up                            10
+## 82     gad_05 restlessness/keyed up                            10
+## 83     sas_01 restlessness/keyed up                            10
+## 84    cesd_11                 sleep                             1
+## 85    qids_04                 sleep                             1
+## 86    cesd_05                 sleep                             4
+## 87    cesd_19                 sleep                             4
+## 88     phq_03                 sleep                             4
+## 89    qids_01                 sleep                             4
+## 90    qids_02                 sleep                             4
+## 91    qids_03                 sleep                             4
+## 92     sas_15                 sleep                             9
+## 93    dass_07      somatic symptoms                             9
+## 94     sas_05      somatic symptoms                             9
+## 95     sas_10      somatic symptoms                             9
+## 96     sas_06      somatic symptoms                             9
+## 97     sas_13      somatic symptoms                             9
+## 98    dass_02      somatic symptoms                             9
+## 99    dass_04      somatic symptoms                             9
+## 100   dass_19      somatic symptoms                             9
+## 101   hads_09      somatic symptoms                             9
+## 102    sas_08      somatic symptoms                             9
+## 103    sas_09      somatic symptoms                             9
+## 104    sas_11      somatic symptoms                             9
+## 105    sas_12      somatic symptoms                             9
+## 106    sas_14      somatic symptoms                             9
+## 107   cesd_14               suicide                             1
+## 108   cesd_15               suicide                             1
+## 109    phq_09               suicide                             1
+## 110   qids_12               suicide                             1
+## 111 promis_20               suicide                             1
+## 112   cesd_09   worthlessness/guilt                             1
+## 113   cesd_17   worthlessness/guilt                             5
+## 114    phq_06   worthlessness/guilt                             5
+## 115 promis_01   worthlessness/guilt                             5
+## 116 promis_06   worthlessness/guilt                             5
+## 117 promis_09   worthlessness/guilt                             5
+## 118 promis_12   worthlessness/guilt                             5
+## 119 promis_27   worthlessness/guilt                             5
+## 120   qids_11   worthlessness/guilt                             6
+## 121 promis_03   worthlessness/guilt                             7
+## 122 promis_13   worthlessness/guilt                             7
+## 123   dass_17   worthlessness/guilt                            11
+##     walktrap_communities
+## 1                      4
+## 2                      4
+## 3                      4
+## 4                      2
+## 5                      4
+## 6                      3
+## 7                      4
+## 8                      1
+## 9                      1
+## 10                     1
+## 11                     1
+## 12                     2
+## 13                     2
+## 14                     2
+## 15                     4
+## 16                     4
+## 17                     4
+## 18                     2
+## 19                     4
+## 20                     2
+## 21                     3
+## 22                     2
+## 23                     4
+## 24                     4
+## 25                     4
+## 26                     4
+## 27                     4
+## 28                     4
+## 29                     4
+## 30                     4
+## 31                     4
+## 32                     2
+## 33                     2
+## 34                     4
+## 35                     4
+## 36                     4
+## 37                     4
+## 38                     4
+## 39                     4
+## 40                     4
+## 41                     4
+## 42                     4
+## 43                     4
+## 44                     4
+## 45                     2
+## 46                     2
+## 47                     2
+## 48                     3
+## 49                     4
+## 50                     2
+## 51                     3
+## 52                     2
+## 53                     2
+## 54                     4
+## 55                     2
+## 56                     2
+## 57                     2
+## 58                     3
+## 59                     3
+## 60                     3
+## 61                     3
+## 62                     3
+## 63                     3
+## 64                     3
+## 65                     3
+## 66                     3
+## 67                     2
+## 68                     2
+## 69                     3
+## 70                     2
+## 71                     3
+## 72                     3
+## 73                     2
+## 74                     2
+## 75                     2
+## 76                     2
+## 77                     2
+## 78                     2
+## 79                     2
+## 80                     2
+## 81                     2
+## 82                     2
+## 83                     2
+## 84                     1
+## 85                     1
+## 86                     2
+## 87                     2
+## 88                     2
+## 89                     2
+## 90                     2
+## 91                     3
+## 92                     3
+## 93                     1
+## 94                     1
+## 95                     1
+## 96                     2
+## 97                     2
+## 98                     3
+## 99                     3
+## 100                    3
+## 101                    3
+## 102                    3
+## 103                    3
+## 104                    3
+## 105                    3
+## 106                    3
+## 107                    1
+## 108                    1
+## 109                    1
+## 110                    1
+## 111                    3
+## 112                    1
+## 113                    4
+## 114                    4
+## 115                    4
+## 116                    4
+## 117                    4
+## 118                    4
+## 119                    4
+## 120                    4
+## 121                    4
+## 122                    4
+## 123                    4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wt1 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{walktrap\_communities }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{wt2 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{walktrap\_communities }\SpecialCharTok{==} \DecValTok{2}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{wt3 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{walktrap\_communities }\SpecialCharTok{==} \DecValTok{3}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{wt4 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{walktrap\_communities }\SpecialCharTok{==} \DecValTok{4}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+
+
+
+\NormalTok{color\_nodes\_symp\_df }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"darkblue"}\NormalTok{, }\StringTok{"limegreen"}\NormalTok{, }\StringTok{"darkorange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{) }\CommentTok{\#, "grey", "yellow", "black", "black", "magenta", "brown", "darkorchid4" ,"white", "black" )}
+
+
+\FunctionTok{qgraph}\NormalTok{(symp\_spear, }\AttributeTok{layout=}\StringTok{"spring"}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{colnames}\NormalTok{(readable\_anx\_dp), }\AttributeTok{sampleSize =} \FunctionTok{nrow}\NormalTok{(df\_anx\_dp\_adj), }\AttributeTok{groups =} \FunctionTok{list}\NormalTok{(}\StringTok{\textquotesingle{}C1 {-} Sui/Sleep/Soma/Appe\textquotesingle{}} \OtherTok{=}\NormalTok{ wt1, }\StringTok{\textquotesingle{}C2 {-} Sleep/Fatig/Rest/Dep\textquotesingle{}} \OtherTok{=}\NormalTok{ wt2, }\StringTok{\textquotesingle{}C3 {-} Soma/Fear/Moto/Rest\textquotesingle{}} \OtherTok{=}\NormalTok{ wt3, }\StringTok{\textquotesingle{}C4 {-} Anhe/Dep/Wort/Conc\textquotesingle{}} \OtherTok{=}\NormalTok{ wt4), }\AttributeTok{color =}\NormalTok{ color\_nodes\_symp\_df, }\AttributeTok{theme=}\StringTok{"TeamFortress"}\NormalTok{, }\AttributeTok{label.prop=}\FloatTok{0.8}\NormalTok{, }\AttributeTok{vsize=}\DecValTok{2}\NormalTok{, }\AttributeTok{label.cex=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-31-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lv1 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{1}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{lv2 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{2}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{lv3 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{3}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{lv4 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{4}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{lv5 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{5}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{lv6 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{6}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{lv7 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{7}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{lv8 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{8}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{lv9 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{9}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{lv10 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{10}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{lv11 }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{louvain\_comm\_consensus\_r1}\FloatTok{.086} \SpecialCharTok{==} \DecValTok{11}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+
+
+
+\NormalTok{color\_nodes\_symp\_df }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"darkblue"}\NormalTok{, }\StringTok{"limegreen"}\NormalTok{, }\StringTok{"darkorange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{, }\StringTok{"grey"}\NormalTok{, }\StringTok{"yellow"}\NormalTok{, }\StringTok{"black"}\NormalTok{, }\StringTok{"magenta"}\NormalTok{, }\StringTok{"brown"}\NormalTok{, }\StringTok{"darkorchid4"}\NormalTok{ ,}\StringTok{"white"}\NormalTok{ )}
+
+
+\FunctionTok{qgraph}\NormalTok{(symp\_spear, }\AttributeTok{layout=}\StringTok{"spring"}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{colnames}\NormalTok{(readable\_anx\_dp), }\AttributeTok{sampleSize =} \FunctionTok{nrow}\NormalTok{(df\_anx\_dp\_adj), }\AttributeTok{groups =} \FunctionTok{list}\NormalTok{(}\StringTok{\textquotesingle{}C1 {-} Sui/Appe/Sleep\textquotesingle{}} \OtherTok{=}\NormalTok{ lv1, }\StringTok{\textquotesingle{}C2 {-} Depressed Mood\textquotesingle{}} \OtherTok{=}\NormalTok{ lv2, }\StringTok{\textquotesingle{}C3{-} Conc/Motor/Fatig\textquotesingle{}} \OtherTok{=}\NormalTok{ lv3, }\StringTok{\textquotesingle{}C4 {-} Sleep\textquotesingle{}} \OtherTok{=}\NormalTok{ lv4, }\StringTok{\textquotesingle{}C5 {-} Wort/Dep\textquotesingle{}} \OtherTok{=}\NormalTok{ lv5, }\StringTok{\textquotesingle{}C6 {-} AppeUP\textquotesingle{}} \OtherTok{=}\NormalTok{ lv6, }\StringTok{\textquotesingle{}C7 {-} Dep/Wort\textquotesingle{}} \OtherTok{=}\NormalTok{ lv7, }\StringTok{\textquotesingle{}C8 {-} Dep/Anhe\textquotesingle{}} \OtherTok{=}\NormalTok{ lv8, }\StringTok{\textquotesingle{}C9 {-} Soma/Fear\textquotesingle{}} \OtherTok{=}\NormalTok{ lv9, }\StringTok{\textquotesingle{}C10 {-} Rest\textquotesingle{}} \OtherTok{=}\NormalTok{ lv10, }\StringTok{\textquotesingle{}C11 {-} Anhe/Dep\textquotesingle{}} \OtherTok{=}\NormalTok{ lv11 ), }\AttributeTok{color =}\NormalTok{ color\_nodes\_symp\_df, }\AttributeTok{theme=}\StringTok{"TeamFortress"}\NormalTok{, }\AttributeTok{label.prop=}\FloatTok{0.8}\NormalTok{, }\AttributeTok{vsize=}\DecValTok{2}\NormalTok{, }\AttributeTok{label.cex=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-32-1.pdf}
+
+\subsection{Creating the Network graph obtained with the best Louvain
+community}\label{creating-the-network-graph-obtained-with-the-best-louvain-community}
+
+Each group has the name of the main symptom represented on its
+community. For example: the group related to suicide has some items
+related to weight loss and change of appetite. This happens likely
+because these items tend to cluster together
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{color\_nodes\_symp\_df }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"darkblue"}\NormalTok{, }\StringTok{"limegreen"}\NormalTok{, }\StringTok{"darkorange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{, }\StringTok{"grey"}\NormalTok{, }\StringTok{"yellow"}\NormalTok{, }\StringTok{"black"}\NormalTok{, }\StringTok{"magenta"}\NormalTok{, }\StringTok{"brown"}\NormalTok{, }\StringTok{"darkorchid4"}\NormalTok{ ,}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"red"}\NormalTok{)}
+
+
+\NormalTok{anhe }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}anhedonia\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{appe }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}apetite/weight\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{conc }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}concentration\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{dep }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}depressed mood\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{fat }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}fatigue\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{fear }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}fear/keyed up\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{irri }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}Irritability\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{motor }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}psychomotor\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{rest }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}restlessness/keyed up\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{sleep }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}sleep\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{soma }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}somatic symptoms\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{sui }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}suicide\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+\NormalTok{wort }\OtherTok{\textless{}{-}}\NormalTok{ df\_comm[df\_comm}\SpecialCharTok{$}\NormalTok{core\_dsm\_symptoms }\SpecialCharTok{==} \StringTok{\textquotesingle{}worthlessness/guilt\textquotesingle{}}\NormalTok{, ]}\SpecialCharTok{$}\NormalTok{n}
+
+
+\NormalTok{lsymp }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\StringTok{\textquotesingle{}suicide\textquotesingle{}} \OtherTok{=}\NormalTok{ sui, }\StringTok{\textquotesingle{}depressed\_mood\textquotesingle{}} \OtherTok{=}\NormalTok{ dep, }\StringTok{\textquotesingle{}fatigue\textquotesingle{}} \OtherTok{=}\NormalTok{ fat, }\StringTok{\textquotesingle{}sleep\textquotesingle{}} \OtherTok{=}\NormalTok{ sleep, }\StringTok{\textquotesingle{}worthlessness\textquotesingle{}} \OtherTok{=}\NormalTok{ wort, }\StringTok{\textquotesingle{}appetite\textquotesingle{}} \OtherTok{=}\NormalTok{ appe, }\StringTok{\textquotesingle{}concentration\textquotesingle{}} \OtherTok{=}\NormalTok{ conc , }\StringTok{\textquotesingle{}fear\textquotesingle{}} \OtherTok{=}\NormalTok{ fear, }\StringTok{"irritability"} \OtherTok{=}\NormalTok{ irri , }\StringTok{\textquotesingle{}anhedonia\textquotesingle{}} \OtherTok{=}\NormalTok{ anhe, }\StringTok{\textquotesingle{}psychomotor\textquotesingle{}} \OtherTok{=}\NormalTok{ motor, }\StringTok{\textquotesingle{}restlessness\textquotesingle{}} \OtherTok{=}\NormalTok{ rest, }\StringTok{\textquotesingle{}somatic\textquotesingle{}} \OtherTok{=}\NormalTok{ soma)}
+
+
+\FunctionTok{qgraph}\NormalTok{(symp\_spear, }\AttributeTok{layout=}\StringTok{"spring"}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{colnames}\NormalTok{(readable\_anx\_dp),}\AttributeTok{sampleSize =} \FunctionTok{nrow}\NormalTok{(df\_anx\_dp\_adj), }\AttributeTok{groups =}\NormalTok{ lsymp, }\AttributeTok{color =}\NormalTok{ color\_nodes\_symp\_df, }\AttributeTok{theme=}\StringTok{"TeamFortress"}\NormalTok{, }\AttributeTok{label.prop=}\FloatTok{0.8}\NormalTok{, }\AttributeTok{vsize=}\DecValTok{2}\NormalTok{, }\AttributeTok{label.cex=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{network_analysis_files/figure-latex/unnamed-chunk-33-1.pdf}
+\#\# Conclusion
+
+Conectar exploraciones de comunidades con medidas de centralidad. Hacer
+inferencias sobre o explorar más en relación a la naturaleza topológica
+de síntomas
+
+\end{document}

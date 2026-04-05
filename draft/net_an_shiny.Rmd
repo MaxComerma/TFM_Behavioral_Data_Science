@@ -1,0 +1,99 @@
+---
+title: "net_analysis"
+author: "Pietro Olivetti"
+date: "2024-08-05"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    social: menu
+    source_code: embed
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+
+
+#Ids = 1, Sociodem = 2:8, Pers_BFI2 = 9:23, Pers_hexaco = 24:33, Depr_cesd = 34:53, Depr_phq = 54:63, Depr_promis = 64:91, Depr_qids = 92:107, Depr_Ans_dass = 108:128, Depr_Ans_hads = 129:142, Ans_gad = 143:149, Ans_tmas = 150:199, Ans_sas = 200:214
+
+```
+
+```{r loading, message=FALSE, warning=FALSE}
+#loading libraries
+
+library(flexdashboard)
+library(tidyverse)
+library(shiny)
+library(plotly)
+library(markdown)
+library(knitr)
+library(qgraph)
+
+#knitr::knit('flex.Rmd')
+```
+
+```{r}
+df <- read.csv('../data/data_cleaned.csv')[2:215]
+
+#promis <- df[, 64:91]
+phq <- df[54:63]
+
+#promis
+#promis_vals <- c(colnames(promis))
+
+#as.data.frame(df[, 64:91])
+```
+# Dashboard
+
+## *Scales Selection* {.sidebar data-width="250"}
+
+### Scales
+
+```{r}
+#PROMIS
+checkboxInput("promis", label = "Promis", value = TRUE)
+act <- reactive({if(input$promis == TRUE) {df[, 64:91]} })
+
+#PHQ
+checkboxInput("phq", label = "PHQ", value = FALSE)
+#act <- reactive({if(input$phq == TRUE) {cbind(act, df[, 54:63])} })
+
+opt_vars <- c("promis", "phq")
+
+
+
+```
+
+```{r}
+#cut_out <- reactive({req(input$promis) df %>% select(df[, input$promis]) })
+
+#df[, c(df[64:91])]
+```
+
+## Column {data-width="700"}
+
+### Network Analysis
+
+```{r}
+renderPlot({
+  #ndf2 <- reactive(input$promis)
+  #ndf <- df[8:15] %>% filter(cntry == input$countries)
+  zorderdf2 <- cor(act())
+  qgr <- qgraph(zorderdf2, layout = "spring", nodeNames = colnames(zorderdf2))
+  })
+
+#renderTable({ if(input$promis){promis_action()} else {return()} })
+#colnames(df2)[4:17]
+```
+
+### TTT
+
+```{r}
+renderTable({ selected_columns <- c()
+  if (input$promis) {selected_columns <- c(selected_columns, df[64:91])}
+  else if (input$phq) {selected_columns <- c(selected_columns, df[54:63])}
+})
+```
+
+

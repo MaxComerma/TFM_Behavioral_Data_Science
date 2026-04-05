@@ -1,0 +1,200 @@
+---
+title: "data_prep_processing"
+author: "Pietro Olivetti"
+date: "2024-07-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Questions:
+
+-   Drop phq10?
+- Hacer análisis exploratório para cada escala?
+- reverse items, qué hacer?
+  - Sería más lógico remplazar el elemento por su variable invertida
+
+## Packages and loading
+
+
+```{r}
+library(dplyr)
+library(qgraph)
+library(openxlsx)
+library(ggplot2)
+library(tidyr)
+
+if (!require(stringr)) install.packages('stringr')
+library(stringr)
+
+```
+
+```{r}
+df <- read.xlsx('data.xlsx')
+head(df)
+```
+
+## Data Cleaning
+
+### Identifying and removing missing values
+
+```{r}
+
+#Amount of NAs 
+sum(is.na(df))
+
+#subsetting them
+showna <- df[!complete.cases(df) , ]
+
+#Checking amount of missing values for each row
+id.nas <- c(6, 255, 399, 552, 568, 672, 676, 831, 871)
+c.nas <- c()
+
+for (m in 1:dim(showna)[1]){
+  c.nas <- append(c.nas, sum(is.na(showna[m , ])))
+  }
+
+missing_by_rows <- data.frame(ID = id.nas, NAs_number = c.nas)
+
+missing_by_rows
+
+# subsetting rows
+df[c(id.nas),]
+
+dim(df)
+```
+
+Most of the NAs are for civil status. As there are only few of them, these rows will be removed from the dataset.
+
+```{r}
+df <- df[ - c(id.nas),]
+sum(is.na(df))
+```
+
+## Data Transformation
+
+### Age
+Age type is character, so we'll change it to numeric and look for invalid values or NAs.
+The following invalid characters were found: "1994" ".3"   "&6"   "6"    "5&"  
+We imputed medians on the NAs and 30 when the Year of birth was indicated
+
+```{r}
+typeof(df$Age)
+
+# Regular expression to match exactly two digits
+pattern <- "^\\d{2}$"
+# Identify non-matching values
+non_matching <- df[!str_detect(df$Age, pattern), ]
+non_matching
+
+# One had 1994 so we replace with 30 and the others with the median age (46) on character
+df[105,5] <- 30
+
+df <- df %>% 
+  mutate(Age = as.numeric(Age)) %>%
+  mutate(Age = ifelse(Age > 100 | Age < 18, median(Age, na.rm = TRUE), Age)) %>%
+  mutate(Age = ifelse(is.na(Age), median(Age, na.rm = TRUE), Age))
+
+
+# Are there NAs  
+sum(is.na(df))
+
+
+
+
+```
+
+
+### PHQ items
+
+The domain here is 1 to 4 but the study of reference has it as 0 to 3. Recoding the points.
+
+```{r}
+
+df_transf <- df %>% 
+  mutate(phq_01 = recode(phq_01, `4` = 3, `3` = 2, `2` = 1, `1`= 0)) %>%
+  mutate(phq_02 = recode(phq_02, `4` = 3, `3` = 2, `2` = 1, `1`= 0)) %>%
+  mutate(phq_03 = recode(phq_03, `4` = 3, `3` = 2, `2` = 1, `1`= 0)) %>%
+  mutate(phq_04 = recode(phq_04, `4` = 3, `3` = 2, `2` = 1, `1`= 0)) %>%
+  mutate(phq_05 = recode(phq_05, `4` = 3, `3` = 2, `2` = 1, `1`= 0)) %>%
+  mutate(phq_06 = recode(phq_06, `4` = 3, `3` = 2, `2` = 1, `1`= 0)) %>%
+  mutate(phq_07 = recode(phq_07, `4` = 3, `3` = 2, `2` = 1, `1`= 0)) %>%
+  mutate(phq_08 = recode(phq_08, `4` = 3, `3` = 2, `2` = 1, `1`= 0)) %>%
+  mutate(phq_09 = recode(phq_09, `4` = 3, `3` = 2, `2` = 1, `1`= 0)) %>%
+  mutate(phq_10 = recode(phq_10, `4` = 3, `3` = 2, `2` = 1, `1`= 0)) 
+
+phq <- df_transf[ , 54:62]
+
+head(phq)
+
+```
+
+### Reversed Items
+
+These are the original items and their reversed points. Replacing the first by the later then dropping the reversed
+The only scale concerning anxiety/depression that has reversed items is the binary scale TMAS (reversed columns from 225 to 236). 
+
+```{r}
+
+#In case it's necessary to visualize all the cols iwth original reversed/pairs in a single vector you have it below commented out
+#c(10, 215, 13, 216, 16, 217, 21, 218, 25, 219, 27, 220, 28, 221, 30, 222, 31, 223, 33, 224, 150, 225, 153, 226, 154, 227, 157, 228, 164, 229, 165, 230, 166, 231, 175, 232, 185, 233, 195, 234, 196, 235, 198, 236)
+
+lv <- list(c(10, 215), c(13, 216), c(16, 217), c(21, 218), c(25, 219), c(27, 220), c(28, 221), c(30, 222), c(31, 223), c(33, 224), c(150, 225), c(153, 226), c(154, 227), c(157, 228), c(164, 229), c(165, 230), c(166, 231), c(175, 232), c(185, 233), c(195, 234), c(196, 235), c(198, 236))
+
+for(i in lv){
+# Replace the content by reverse item
+df_transf[i[1]] <- df_transf[i[2]]}
+
+df_transf <- df_transf[, - c(215:length(df_transf))]
+
+
+```
+
+
+Before saving the final version, it's necessary to remove certain items that are present in the DF but are not going to be relevant for the study.
+
+```{r}
+
+#Columns to delete
+to_del <- c("dass_01", "dass_06", "dass_08", "dass_11", "dass_12", "dass_14", "dass_18", "phq_10")
+
+df_transf <- df_transf[, -which(names(df_transf) %in% to_del)]
+
+df_transf
+
+```
+
+## CSV
+
+```{r}
+write.csv(df_transf, 'data_cleaned_temp.csv', row.names = FALSE)
+```
+
+```{r}
+d <- read.csv('data_cleaned_temp.csv')
+colnames(d)
+```
+
+
+Ids = 1, Sociodem = 2:8, Pers_BFI2 = 9:23, Pers_hexaco = 24:33, Depr_cesd = 34:53, Depr_phq = 54:62, Depr_promis = 63:90, Depr_qids = 91:106, Depr_Ans_dass = 107:120, Depr_Ans_hads = 121:134, Ans_gad = 135:141, Ans_tmas = 142:191, Ans_sas = 192:206
+
+
+```{r}
+ 
+df_sums <- d[1] 
+df_sums$sum_cesd <- rowSums(d[34:53])
+df_sums$sum_phq <- rowSums(d[54:62])
+df_sums$sum_promis <- rowSums(d[63:90])
+df_sums$sum_qids <- rowSums(d[91:106])
+df_sums$sum_dass <- rowSums(d[107:120])
+df_sums$sum_hads <- rowSums(d[121:134])
+df_sums$sum_gad <- rowSums(d[135:141])
+df_sums$sum_tmas <- rowSums(d[142:191])
+df_sums$sum_sas <- rowSums(d[192:206])
+
+df_sums
+
+```
+
