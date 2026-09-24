@@ -40,14 +40,14 @@ Study cost estimated at ~€18,300. Assuming an average salary of €1,500 and 7
 ```
 data/              cleaning script (data_cleaning.Rmd) [+ data, see below]
 network_analysis/  net_exploratory.Rmd
-references.md      bibliography
+references/      bibliography
 report/            final report (PDF, Spanish)
 ```
 
 ## Data
 
 - *An anonymized dataset is included
-- 
+  
 ## Reproduce
 
 ```r
