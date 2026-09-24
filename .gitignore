@@ -1,4 +1,15 @@
-.Rproj.user
+# R / RStudio
+.Rproj.user/
 .Rhistory
 .RData
 .Ruserdata
+
+# Rendered / temporary files
+*.html
+*.nb.html
+*.log
+*.aux
+*.tex
+*.Rdata
+*.rds
+~$*
