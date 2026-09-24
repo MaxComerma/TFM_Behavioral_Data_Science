@@ -38,20 +38,22 @@ PROMIS contains more items than several of the other instruments. Its apparent p
 TFM_Behavioral_Data_Science/
 ├── README.md
 ├── .gitignore
+├── .gitattributes
 ├── R/
 │   ├── 01_data_cleaning.Rmd
 │   └── 02_network_analysis.Rmd
 ├── data/
-│   └── README.md
-├── figures/
+│   ├── README.md
+│   └── questions.R
 ├── results/
-│   └── README.md
-├── references/
+│   ├── README.md
+│   └── communities/
+│       └── louvain.xlsx
 └── report/
-    └── TFM
+    └── TFM_Report.pdf
 ```
 
-The repository keeps the main analysis workflow under `R/`. Temporary drafts and participant-level source data have been removed from the public working tree.
+The repository is intentionally curated as a **portfolio version of the TFM**: the main analytical notebooks, selected results and final report are kept, while temporary working files, drafts and participant-level source data are excluded from the public repository.
 
 ## Reproduction
 
