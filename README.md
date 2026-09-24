@@ -74,7 +74,7 @@ Workflow:
 3. Run `R/02_network_analysis.Rmd`.
 4. Review exported figures and result tables before drawing substantive conclusions.
 
-The current repository does not include an `renv.lock`, so exact package-version reproducibility is not yet guaranteed.
+The current repository does not include an `renv.lock`, so exact package-version reproducibility is not guaranteed.
 
 ## Data and privacy
 
