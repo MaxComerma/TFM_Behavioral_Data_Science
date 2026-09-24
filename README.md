@@ -1,63 +1,65 @@
-# Behavioral Data Science Masters Project: Network Analysis of Symptoms of Depression and Anxiety
+# Network Analysis of Depression and Anxiety Symptoms
 
-## Project Overview
+**MSc in Behavioral Data Science (IL3–UB) · Final Project, in collaboration with MetrikaMind**
 
-This project explores the network structure of symptoms related to depression and anxiety. Using statistical techniques and network analysis, we aim to explore the intricate relationships between various symptoms and their potential implications for mental health research.
+Exploratory network analysis of how depression and anxiety symptoms relate to each other, using a quota-representative sample of the Spanish population. The goal is to identify the most central symptoms, which could help make screening and intervention more targeted in workplace mental health.
 
-## Project Structure
+> Documentation and data are in Spanish. Summary below in English.
 
-The project is organized into the following directories and key files:
+## At a glance
 
--   data/
-    -   data_cleaned.csv
-    -   data.xlsx
-    -   data_prep_processing.Rmd
--   network_analysis/
-    -   net_exploratory.Rmd
--   draft/
-    -   exploratory_analysis.Rmd
--   README.md
--   references/
-    -   articles
-    -   books
+| | |
+|---|---|
+| **Sample** | N = 867, quotas by gender, age and province (representative of Spain) |
+| **Instruments** | Depression: PHQ-9, CES-D, PROMIS, QIDS · Depression/anxiety: DASS, HADS · Anxiety: GAD, TMAS, SAS · Personality: BFI-2, HEXACO |
+| **Methods** | Data cleaning, weighted symptom networks (correlation-based), centrality analysis (strength, betweenness, closeness) |
+| **Tools** | R, R Markdown, qgraph, igraph, bootnet, psych, tidyverse |
+| **Team** | Max Comerma, Pietro Olivetti, María Barraza · Supervised by David Gallardo (UB) |
+| **My role** | [Hypothesis definition and preliminary network analysis / add anything else you did] |
 
-### Directories and Files
+## Key findings
 
--   **data/**
+- **PHQ-9 network:** the most central symptoms by strength were item 1 (anhedonia), item 2 (depressed mood / hopelessness) and item 6 (feelings of failure), consistent with DSM-5 core symptoms.
+- **Full network (all scales):** PROMIS items on depressed mood dominated strength and closeness (e.g. "felt emotionally exhausted", "felt that nothing could cheer me up").
+- **Bridge nodes:** the BFI-2 item "full of energy" showed the highest betweenness, suggesting energy level as a possible link between symptom clusters (hypothesis, not a confirmed result).
 
-    -   `data_cleaning.Rmd`: This R Markdown file contains the data cleaning procedures, including data import, preprocessing, and transformation steps necessary to prepare the raw data for analysis.
-    -   `data.xlsx`: The raw dataset containing data related to scales of personality, depression and anxiety.
+## Business case (estimate)
 
--   **network_analysis/**
+Study cost estimated at ~€18,300. Assuming an average salary of €1,500 and 75% pay during sick leave (€1,125/month), the cost is recovered by avoiding 16–17 sick leaves, or ~366 psychologist consultations (~€50 each). See the report for assumptions.
 
-    -   `net_exploratory.Rmd`: This R Markdown file performs the exploratory network analysis, including the creation of correlation matrices, network visualization, and preliminary findings.
+## Limitations and next steps
 
--   **draft/**
+- Networks were built from zero-order correlations; a regularized network (EBICglasso) with bootstrap stability analysis (bootnet) is the natural next step.
+- Scales with many items (e.g. PROMIS) may appear central partly because of item count/redundancy; item overlap should be assessed.
+- Betweenness is known to be less stable; results should be interpreted with caution.
+- Cross-sectional data: connections show association, not causal direction or temporal order.
+- The originally planned predictive model and comparison with a faking-detection model are not included in this version.
 
-    -   `All`: This directory will contain graphical outputs from the network analysis, such as network plots and other visualizations that are currently incomplete and/or are just drafts.
+## Repository structure
 
--   **references/**
+```
+data/              cleaning script (data_cleaning.Rmd) [+ data, see below]
+network_analysis/  net_exploratory.Rmd
+references.md      bibliography
+report/            final report (PDF, Spanish)
+```
 
-    -   `articles and books`: A collection of relevant research papers, books and other references used throughout the project.
+## Data
 
-    ## Getting Started
+- *The dataset is not included because it belongs to the MetrikaMind/UB study.*
 
-### Prerequisites
+## Reproduce
 
-To reproduce the analysis, you need to have the following software installed:
+```r
+install.packages(c("tidyverse", "qgraph", "psych", "knitr", "rmarkdown",
+                   "igraph", "bootnet", "openxlsx", "smacof"))
+```
 
--   R (version 4.0 or higher)
--   RStudio
--   Required R packages: `tidyverse`, `qgraph`, `psych`, `knitr`, `rmarkdown`, `dplyr`, `igraph`, `bootnet`, `openxlsx`, `ggplot2`, `tidyr`, `smacof`
+1. Knit `data/data_cleaning.Rmd` to preprocess the data.
+2. Knit `network_analysis/net_exploratory.Rmd` to reproduce the networks and centrality measures.
 
-### Installation
+Requires R ≥ 4.0 and RStudio.
 
-Install the required R packages by running the following commands in R:
+## References
 
-install.packages(c("tidyverse", "qgraph", "psych", "knitr", "rmarkdown", "dplyr", "igraph", "bootnet", "openxlsx", "ggplot2", "tidyr", "smacof"))
-
-### Running the Analysis
-
--   Data Cleaning: Open the data/data_cleaning.Rmd file in RStudio and knit the document to preprocess the raw data.
-
--   Network Analysis: Open the network_analysis/net_exploratory.Rmd file in RStudio to perform the exploratory network analysis.
+Fried et al. (2016) · Borsboom (2017) · Borsboom et al. (2021) · Forbes et al. (2021) · Deserno et al. (2022) · Cai et al. (2022). Full list in `references.md`.
