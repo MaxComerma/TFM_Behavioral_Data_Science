@@ -15,7 +15,7 @@ Exploratory network analysis of how depression and anxiety symptoms relate to ea
 | **Methods** | Data cleaning, weighted symptom networks (correlation-based), centrality analysis (strength, betweenness, closeness) |
 | **Tools** | R, R Markdown, qgraph, igraph, bootnet, psych, tidyverse |
 | **Team** | Max Comerma, Pietro Olivetti, María Barraza · Supervised by David Gallardo (UB) |
-| **My role** | [Hypothesis definition and preliminary network analysis / add anything else you did] |
+
 
 ## Key findings
 
@@ -46,8 +46,8 @@ report/            final report (PDF, Spanish)
 
 ## Data
 
-- *The dataset is not included because it belongs to the MetrikaMind/UB study.*
-
+- *An anonymized dataset is included
+- 
 ## Reproduce
 
 ```r
